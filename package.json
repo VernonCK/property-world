@@ -1,0 +1,20 @@
+{
+  "name": "property-world",
+  "version": "1.0.0",
+  "description": "property world website ",
+  "homepage": "https://github.com/VernonCK/property-world#readme",
+  "bugs": {
+    "url": "https://github.com/VernonCK/property-world/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VernonCK/property-world.git"
+  },
+  "license": "ISC",
+  "author": "Vernon Clive Kawonza",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
