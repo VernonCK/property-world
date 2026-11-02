@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Propertyworld — Valuation Instruction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 15mm 15mm 16mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 9pt; line-height: 1.55; color: #1a1a1a; }
+
+  .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 10px; border-bottom: 1.5px solid #2D2450; margin-bottom: 16px; }
+  .logo { font-family: 'Georgia', 'Times New Roman', serif; font-size: 15pt; font-weight: 700; letter-spacing: -.2px; }
+  .logo span { color: #4A3D7A; }
+  .tagline { font-size: 6.5pt; letter-spacing: 1.6px; color: #888; margin-top: 2px; text-transform: uppercase; }
+  .office { font-size: 7pt; line-height: 1.6; color: #555; text-align: right; }
+  .office strong { color: #2D2450; font-weight: 600; }
+
+  h1 { font-family: 'Georgia', 'Times New Roman', serif; font-size: 12pt; text-align: center; letter-spacing: 1.2px; margin: 8px 0 16px; color: #2D2450; }
+
+  .applicant { margin-bottom: 14px; }
+  .applicant .row { display: flex; gap: 6px; margin: 4px 0; flex-wrap: wrap; }
+  .applicant .label { color: #555; font-size: 9pt; min-width: 100px; }
+  .applicant .value { font-weight: 500; color: #000; min-width: 180px; border-bottom: 1px dotted #c8c8c8; padding: 0 3px 1px; flex: 1; }
+
+  .re { font-size: 10pt; margin: 12px 0 10px; }
+  .re strong { color: #2D2450; }
+
+  .intro { font-size: 9.5pt; margin-bottom: 10px; line-height: 1.55; }
+
+  ol.clauses { padding-left: 20px; margin-bottom: 16px; font-size: 8.5pt; line-height: 1.6; }
+  ol.clauses li { margin-bottom: 5px; }
+  ol.clauses .fill { font-weight: 600; color: #2D2450; border-bottom: 1px dotted #999; padding: 0 4px 1px; }
+  ol.clauses .clause-num { font-weight: 600; color: #4A3D7A; }
+
+  .sig-block { margin-top: 20px; padding-top: 14px; border-top: 1px solid #d5d0e0; }
+  .sig-block .row { display: flex; gap: 6px; margin: 8px 0; flex-wrap: wrap; }
+  .sig-block .label { color: #555; font-size: 9pt; min-width: 130px; }
+  .sig-block .sig { font-family: 'Caveat', 'Brush Script MT', cursive; font-size: 22pt; color: #111; border-bottom: 1px solid #333; padding: 0 8px 2px; min-width: 200px; line-height: 1.05; display: inline-block; }
+  .sig-block .value { font-weight: 500; color: #000; border-bottom: 1px dotted #c8c8c8; padding: 0 3px 1px; flex: 1; min-width: 180px; }
+
+  .footer { margin-top: 26px; padding-top: 10px; border-top: 1px solid #d5d0e0; text-align: center; font-family: Georgia, serif; font-style: italic; font-size: 8pt; color: #888; }
+  .footer strong { color: #2D2450; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo">Property<span>World</span></div>
+    <div class="tagline">Creating Lasting Partnerships</div>
+  </div>
+  <div class="office">
+    <strong>HEAD OFFICE</strong> · Unit 5A, iTowers, CBD, Plot 54368, Gaborone<br>
+    P O Box 45653, Gaborone<br>
+    Tel: (267) 3972039 · Fax: (267) 3973403<br>
+    Web: www.pw.co.bw
+  </div>
+</div>
+
+<h1>VALUATION INSTRUCTION FORM</h1>
+
+<div class="applicant">
+  <div class="row"><span class="label">Name/Company.</span><span class="value">{{name}}</span></div>
+  <div class="row"><span class="label">Phone/Fax.</span><span class="value">{{phone}}</span></div>
+  <div class="row"><span class="label">Email Address.</span><span class="value">{{email}}</span></div>
+  <div class="row"><span class="label">Postal Address.</span><span class="value">{{postalAddress}}</span></div>
+  <div class="row"><span class="label">Date.</span><span class="value">{{date}}</span></div>
+</div>
+
+<div class="re">
+  <strong>Re:</strong> Lot Number. <span class="value" style="display:inline-block;min-width:100px;border-bottom:1px dotted #999;padding:0 6px 1px;font-weight:600">{{lotNumber}}</span>
+  &nbsp;Ext. <span class="value" style="display:inline-block;min-width:80px;border-bottom:1px dotted #999;padding:0 6px 1px;font-weight:600">{{extension}}</span>
+</div>
+
+<p class="intro">I/We instruct you to carry out a valuation of the above property/ies on the following basis.</p>
+
+<ol class="clauses">
+  <li><span class="clause-num">1.</span> To report on the <span class="fill">{{basis}}</span> values</li>
+  <li><span class="clause-num">2.</span> The valuation is for <span class="fill">{{purpose}}</span> purposes.{{#if bank}} (State the Bank: <span class="fill">{{bank}}</span>){{/if}}</li>
+  <li><span class="clause-num">3.</span> I/we accept your fees for the valuation of the land buildings will be due on collection of the report. The fees will be based on the Real Estate Institute of Botswana fee scales and will be calculated as a percentage of Open Market Value.</li>
+  <li><span class="clause-num">4.</span> I/we agree that additional expenses will be charged on the basis of actual cost reasonably incurred, with travel in our own vehicle being charged at P5.50 per kilometer and deeds searches.</li>
+  <li><span class="clause-num">5.</span> We will proceed with your instructions after you deposit with us the sum of <strong>P{{deposit}}</strong> being a payment on account of our fees and expenses. The deposit outside Gaborone shall be P2 000.00.</li>
+  <li><span class="clause-num">6.</span> The full fees shall be settled before the valuation reports are dispatched/collected.</li>
+  <li><span class="clause-num">7.</span> In the event of our fee charges remaining unpaid for more than 30 days, forcing us to recover through attorneys, it is specifically agreed that all legal and administrative costs incidental to the claim and costs on attorney and clients scale together with 10% collection commission including interest at 4% per month will be recovered from you by the collecting attorneys.</li>
+  <li><span class="clause-num">8.</span> By copy of this letter I/we authorize you to carry out a search of the titles/s of the property/ies to be valued at the office of the Registrar of Deeds.</li>
+  <li><span class="clause-num">9.</span> By appending my signature hereto I in my capacity as <span class="fill">{{capacity}}</span> do hereby bind myself as co-principal debtor and surety with the company. I hereby renounce all benefits of exclusion and division.</li>
+</ol>
+
+<div class="sig-block">
+  <div class="row"><span class="label">Signed.</span><span class="sig">{{signature}}</span></div>
+  <div class="row"><span class="label">Date.</span><span class="value">{{date}}</span></div>
+  <div class="row"><span class="label">Name.</span><span class="value">{{name}}</span></div>
+  <div class="row"><span class="label">Physical Address.</span><span class="value">{{physicalLocation}}</span></div>
+  <div class="row"><span class="label">Contact person.</span><span class="value">{{contactPerson}}</span></div>
+  <div class="row"><span class="label">Mobile No. (For Access into in the Property).</span><span class="value">{{contactMobile}}</span></div>
+</div>
+
+<div class="footer"><strong>Propertyworld (Pty) Ltd</strong> · Creating lasting Partnerships</div>
+
+</body>
+</html>

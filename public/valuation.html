@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Property Valuation | Property World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Deep purple from the logo */
+  --purple-deep:#2D2450;
+  --purple:#4A3D7A;
+  --purple-mid:#7B6BA8;
+  --purple-soft:#F1EDFA;
+  --purple-line:#D9D2EB;
+
+  /* Aliases for demo CSS */
+  --blue:var(--purple-deep);
+  --blue-h:var(--purple);
+  --blue-soft:var(--purple-soft);
+
+  --amber:#EDB458; --amber-soft:#fdf4e4; --amber-ink:#8a5a12;
+  --ink:#151515; --g600:#717171; --g400:#adadad; --g200:#e0e0e0; --g100:#f5f5f5;
+  --serif:'Playfair Display', Georgia, serif;
+  --script:'Caveat', cursive;
+  --sans:'Inter', -apple-system, sans-serif;
+  --page-pad:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{overflow-x:hidden}
+body{font-family:var(--sans);color:var(--ink);background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;max-width:100vw}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+.hidden{display:none !important}
+::selection{background:var(--purple-soft);color:var(--purple-deep)}
+
+/* ============ HEADER ============ */
+.hdr{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #eaeaea}
+.hdr-top{display:flex;align-items:center;height:72px;padding:0 var(--page-pad);gap:22px;max-width:100%}
+.hdr-logo{display:flex;align-items:center;flex-shrink:0}
+.hdr-logo img{height:52px;width:auto;display:block}
+.hdr-spacer{flex:1}
+.hdr-links{display:flex;gap:22px;font-size:13.5px;color:var(--ink)}
+.hdr-links a{transition:color .15s}
+.hdr-links a:hover{color:var(--purple-deep)}
+.hdr-links a.active{color:var(--purple-deep);font-weight:600}
+.hdr-hamburger{display:none;width:40px;height:40px;border-radius:50%;align-items:center;justify-content:center;color:var(--ink);transition:background .15s;flex-shrink:0}
+.hdr-hamburger:hover{background:var(--g100)}
+.hdr-hamburger svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.hdr-cta{font-size:14px;color:var(--purple-deep);border:1px solid var(--purple-deep);border-radius:100px;padding:8px 18px;font-weight:500;background:#fff;transition:.15s;white-space:nowrap}
+.hdr-cta:hover{background:var(--purple-deep);color:#fff}
+.hdr-sub{display:flex;align-items:center;gap:20px;height:56px;padding:0 var(--page-pad);border-top:1px solid #f0f0f0;overflow-x:auto;max-width:100%}
+.hdr-sub::-webkit-scrollbar{display:none}
+.hdr-back{display:flex;align-items:center;gap:8px;font-size:14px;white-space:nowrap}
+.hdr-back:hover{color:var(--purple-deep)}
+.hdr-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.hdr-crumbs{display:flex;gap:6px;font-size:13px;color:var(--g600);white-space:nowrap}
+.hdr-crumbs::before{content:'';width:1px;height:18px;background:var(--g200);margin-right:16px;align-self:center}
+.hdr-crumbs a{color:var(--g600)}
+.hdr-crumbs a:hover{color:var(--purple-deep)}
+@media(max-width:1100px){
+  .hdr-hamburger{display:flex}
+  .hdr-links{display:none}
+  .hdr-cta{display:none}
+  .hdr-top{padding:0 20px;gap:14px;height:64px}
+  .hdr-logo img{height:46px}
+  .hdr-sub{padding:0 20px}
+  :root{--page-pad:24px}
+}
+@media(max-width:700px){
+  .hdr-top,.hdr-sub{padding:0 16px}
+  .hdr-sub{height:50px}
+  .hdr-logo img{height:42px}
+  :root{--page-pad:16px}
+}
+
+/* ============ MOBILE MENU ============ */
+.mob-menu{position:fixed;inset:0;z-index:500;display:none}
+.mob-menu.open{display:block}
+.mob-menu-overlay{position:absolute;inset:0;background:rgba(10,14,20,.5);animation:fadeIn .2s ease}
+.mob-menu-drawer{position:absolute;top:0;left:0;bottom:0;width:320px;max-width:86vw;background:#fff;overflow-y:auto;padding:20px 24px 32px;display:flex;flex-direction:column;animation:slideIn .25s ease;box-shadow:8px 0 40px rgba(0,0,0,.15)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+.mob-menu-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.mob-menu-logo img{height:48px;width:auto;display:block}
+.mob-menu-close{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--g600);line-height:1}
+.mob-menu-close:hover{background:var(--g100)}
+.mob-menu-nav{display:flex;flex-direction:column;border-top:1px solid var(--g200)}
+.mob-menu-nav a{padding:16px 0;font-size:16px;font-weight:500;border-bottom:1px solid var(--g200);transition:color .15s}
+.mob-menu-nav a:hover{color:var(--purple-deep)}
+.mob-menu-nav a.active{color:var(--purple-deep);font-weight:600}
+.mob-menu-actions{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.mob-menu-actions .hdr-cta{display:block;text-align:center;padding:12px 18px;background:var(--purple-deep);color:#fff;border:0}
+
+/* ============ HERO ============ */
+.hero-parallax{position:relative;min-height:480px;height:64vh;display:flex;align-items:center;color:#fff;background-image:linear-gradient(180deg, rgba(45,36,80,.55) 0%, rgba(45,36,80,.72) 60%, rgba(45,36,80,.85) 100%),url('https://img.jamesedition.com/listing_images/2026/05/13/16/40/35/c63a9de3-63dc-44f4-bdf2-17fcfb60e144/je/2000xxs.jpg');background-size:cover;background-position:center;background-attachment:fixed;overflow:hidden}
+@media(max-width:900px){.hero-parallax{background-attachment:scroll;height:auto;min-height:0;padding:72px 0 56px}}
+.hero-inner{max-width:1360px;margin:0 auto;padding:0 var(--page-pad);width:100%;position:relative;z-index:2}
+.hero-parallax h1{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,60px);line-height:1.06;letter-spacing:-.5px;max-width:16ch;margin-bottom:22px}
+.hero-parallax .lede{font-size:clamp(15px,1.3vw,17px);line-height:1.65;max-width:54ch;color:rgba(255,255,255,.86);margin-bottom:32px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary-lg{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);padding:15px 28px;border-radius:100px;font-size:15px;font-weight:600;transition:.18s}
+.btn-primary-lg:hover{background:var(--amber);color:#151515;transform:translateY(-1px);box-shadow:0 12px 30px rgba(237,180,88,.35)}
+.btn-primary-lg svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;transition:transform .18s}
+.btn-primary-lg:hover svg{transform:translateX(3px)}
+.btn-ghost-lg{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);color:#fff;padding:15px 26px;border-radius:100px;font-size:15px;font-weight:500;transition:.18s;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px)}
+.btn-ghost-lg:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.4)}
+
+/* ============ SHARED SECTION ============ */
+.section-inner{max-width:1360px;margin:0 auto;padding:0 var(--page-pad)}
+.section-eyebrow{display:inline-block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--purple-deep);margin-bottom:14px}
+.section-header{max-width:720px;margin-bottom:44px}
+.section-header h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,42px);line-height:1.15;letter-spacing:-.3px;margin-bottom:14px}
+.section-header p{font-size:16px;color:var(--g600);line-height:1.65}
+
+/* ============ CALCULATOR ============ */
+.calculator-section{padding:88px 0 72px;background:#fff}
+@media(max-width:900px){.calculator-section{padding:56px 0 48px}}
+.calc-card{background:#fff;border:1px solid var(--g200);border-radius:16px;display:grid;grid-template-columns:1.15fr 1fr;gap:0;overflow:hidden;box-shadow:0 20px 50px rgba(45,36,80,.06)}
+@media(max-width:900px){.calc-card{grid-template-columns:1fr}}
+.calc-inputs{padding:40px 44px;border-right:1px solid #eef0f3}
+@media(max-width:900px){.calc-inputs{padding:28px 24px;border-right:0;border-bottom:1px solid #eef0f3}}
+@media(max-width:520px){.calc-inputs{padding:24px 20px}}
+.calc-field{margin-bottom:26px}
+.calc-field:last-child{margin-bottom:0}
+.calc-field > label{display:block;font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--g600);text-transform:uppercase;margin-bottom:10px}
+.calc-field > label .hint{font-weight:400;text-transform:none;letter-spacing:0;color:var(--g400);font-size:11.5px;margin-left:4px}
+.input-with-prefix,.input-with-suffix{display:flex;align-items:center;gap:0;border:1.5px solid var(--g200);border-radius:10px;background:#fff;transition:border-color .15s,box-shadow .15s;overflow:hidden}
+.input-with-prefix:focus-within,.input-with-suffix:focus-within{border-color:var(--purple-deep);box-shadow:0 0 0 3px rgba(74,61,122,.08)}
+.input-with-prefix .prefix,.input-with-suffix .suffix{padding:0 16px;font-family:var(--serif);font-size:22px;font-weight:500;color:var(--g400);flex-shrink:0}
+.input-with-suffix .suffix{font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--g600);padding:0 14px}
+.input-with-prefix input{flex:1;border:0;outline:none;background:transparent;font-family:var(--serif);font-size:26px;font-weight:500;color:var(--ink);padding:14px 16px 14px 0;min-width:0;letter-spacing:-.3px}
+.input-with-suffix input{flex:1;border:0;outline:none;background:transparent;font-family:var(--sans);font-size:15px;font-weight:500;color:var(--ink);padding:12px 4px 12px 14px;min-width:0}
+.calc-range{margin-top:14px}
+.calc-range input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:#e5e8ec;outline:none;cursor:pointer}
+.calc-range input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--purple-deep);border:3px solid #fff;box-shadow:0 2px 6px rgba(45,36,80,.35);cursor:pointer}
+.calc-range input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--purple-deep);border:3px solid #fff;box-shadow:0 2px 6px rgba(45,36,80,.35);cursor:pointer;border-color:#fff}
+.range-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:11.5px;color:var(--g400)}
+.calc-type-pills{display:flex;flex-direction:column;gap:8px}
+.calc-type-pill{position:relative;cursor:pointer}
+.calc-type-pill input{position:absolute;opacity:0;pointer-events:none}
+.calc-type-pill span{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:10px;border:1.5px solid var(--g200);background:#fff;font-size:13.5px;font-weight:500;color:var(--ink);transition:.15s;gap:12px}
+.calc-type-pill:hover span{border-color:#c8ccd2}
+.calc-type-pill span::after{content:'○';font-size:16px;color:var(--g400);flex-shrink:0}
+.calc-type-pill input:checked ~ span{border-color:var(--purple-deep);background:var(--purple-soft);color:var(--purple-deep);font-weight:600}
+.calc-type-pill input:checked ~ span::after{content:'●';color:var(--purple-deep)}
+.calc-hint{font-size:12px;color:var(--g600);margin-top:8px;line-height:1.5}
+.calc-output{padding:40px 44px;background:linear-gradient(180deg,#fbfcfd,#f5f8fb);display:flex;flex-direction:column}
+@media(max-width:900px){.calc-output{padding:28px 24px}}
+@media(max-width:520px){.calc-output{padding:24px 20px}}
+.calc-output-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:5px 0;font-size:14.5px}
+.calc-output-row > span:first-child{color:var(--g600)}
+.calc-output-row > span:last-child{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;font-size:15px}
+.calc-output-sub{font-size:12px;color:var(--g400);margin-bottom:10px;padding-left:2px;line-height:1.45}
+.calc-divider{height:1px;background:#dde3ea;margin:18px 0}
+.calc-total-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:18px}
+.calc-total-row > span:first-child{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--g600)}
+.calc-total-row > span:last-child{font-family:var(--serif);font-size:30px;font-weight:500;color:var(--ink);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.calc-output-row.small{font-size:13.5px;padding:3px 0}
+.calc-output-row.small > span:last-child{font-size:14px}
+.calc-schedule-link{display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:22px;font-size:13.5px;font-weight:600;color:var(--purple-deep);transition:gap .15s}
+.calc-schedule-link:hover{gap:10px}
+.calc-schedule-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2}
+.calc-note{display:flex;align-items:flex-start;gap:12px;margin-top:24px;padding:16px 20px;background:#fbfcfd;border:1px solid #eef0f3;border-radius:10px;font-size:12.5px;color:var(--g600);line-height:1.6}
+.calc-note svg{width:16px;height:16px;stroke:var(--purple-deep);fill:none;stroke-width:1.8;flex-shrink:0;margin-top:1px}
+
+/* ============ FEE SCHEDULE ============ */
+.schedule-section{padding:72px 0;background:#fbfcfd;border-top:1px solid #eef0f3;border-bottom:1px solid #eef0f3}
+@media(max-width:900px){.schedule-section{padding:52px 0}}
+.schedule-list{display:flex;flex-direction:column;gap:12px;max-width:960px}
+.schedule-item{background:#fff;border:1px solid var(--g200);border-radius:12px;transition:.18s;overflow:hidden}
+.schedule-item[open]{border-color:#cfd6e0;box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.schedule-item summary{list-style:none;cursor:pointer;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:15px;font-weight:600;color:var(--ink);transition:.15s}
+.schedule-item summary::-webkit-details-marker{display:none}
+.schedule-item summary:hover{background:#fbfcfd}
+.schedule-item summary::after{content:'+';font-family:var(--serif);font-size:22px;font-weight:400;color:var(--g600);transition:transform .2s;flex-shrink:0;width:24px;text-align:center;line-height:1}
+.schedule-item[open] summary::after{transform:rotate(45deg)}
+.schedule-body{padding:0 26px 24px;border-top:1px solid #eef0f3;padding-top:20px}
+.fee-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
+.fee-table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
+.fee-table th{text-align:left;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--g600);padding:10px 14px;background:#f5f7fa;border-bottom:1px solid #eef0f3}
+.fee-table th:last-child,.fee-table td:last-child{text-align:right}
+.fee-table td{padding:12px 14px;border-bottom:1px solid #f2f4f7;color:var(--ink);vertical-align:top}
+.fee-table tr:last-child td{border-bottom:0}
+.fee-table td:nth-child(2){font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
+.fee-table td:nth-child(3){color:var(--g600);font-variant-numeric:tabular-nums}
+.clause-list{list-style:none;font-size:13.5px;color:var(--g600);line-height:1.7}
+.clause-list li{padding:12px 0;border-bottom:1px solid #f2f4f7;display:flex;gap:14px;align-items:flex-start}
+.clause-list li:last-child{border-bottom:0}
+.clause-list li strong{color:var(--ink);font-weight:600}
+.clause-num{flex-shrink:0;font-family:var(--serif);font-size:11px;font-weight:600;color:var(--purple-deep);background:var(--purple-soft);border-radius:4px;padding:3px 8px;line-height:1.3;min-width:44px;text-align:center}
+@media(max-width:700px){.schedule-item summary{padding:16px 18px;font-size:14px}.schedule-body{padding:18px 18px 20px}.fee-table{font-size:12px;min-width:520px}.fee-table th,.fee-table td{padding:9px 10px}.clause-list{font-size:12.5px}.clause-list li{padding:10px 0}}
+
+/* ============ HOW IT WORKS ============ */
+.how-section{padding:80px 0 60px;background:#fff}
+@media(max-width:900px){.how-section{padding:56px 0 40px}}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.step{background:#fff;border:1px solid var(--g200);border-radius:14px;padding:30px 26px;position:relative;transition:.2s}
+.step:hover{border-color:#cfd6e0;box-shadow:0 16px 44px rgba(0,0,0,.06)}
+.step-num{position:absolute;top:-18px;left:26px;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;font-weight:500}
+.step h3{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.25;margin:14px 0 10px}
+.step p{font-size:14px;color:var(--g600);line-height:1.65}
+@media(max-width:900px){.steps{grid-template-columns:1fr;gap:22px}}
+
+/* ============ REQUEST SECTION ============ */
+.request-section{padding:60px 0 80px;background:#fbfcfd;border-top:1px solid #eef0f3}
+@media(max-width:900px){.request-section{padding:48px 0 60px}}
+.request-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:44px;align-items:start}
+@media(max-width:1000px){.request-layout{grid-template-columns:1fr;gap:28px}}
+.form-main{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.02)}
+.form-section{padding:32px 40px;border-bottom:1px solid #eef0f3}
+.form-section:last-of-type{border-bottom:0}
+@media(max-width:700px){.form-section{padding:26px 22px}}
+.form-section-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px}
+.section-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--purple-soft);color:var(--purple-deep);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;font-weight:600;margin-top:-2px}
+.form-section-head h3{font-family:var(--serif);font-weight:500;font-size:19px;line-height:1.3;margin-bottom:4px}
+.form-section-head p{font-size:13.5px;color:var(--g600);line-height:1.5}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-grid.full{grid-template-columns:1fr}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field.full{grid-column:1/-1}
+.form-field label{font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--g600);text-transform:uppercase}
+.form-field label .req{color:#c0392b;font-weight:700;margin-left:2px}
+.form-field label .hint{font-weight:400;text-transform:none;letter-spacing:0;color:var(--g400);font-size:11.5px;margin-left:4px}
+.form-field input[type=text],
+.form-field input[type=email],
+.form-field input[type=tel],
+.form-field input[type=date],
+.form-field textarea,
+.form-field select{width:100%;border:1.5px solid var(--g200);border-radius:8px;padding:12px 14px;font-family:inherit;font-size:14.5px;background:#fff;transition:border-color .15s,box-shadow .15s;color:var(--ink)}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{outline:none;border-color:var(--purple-deep);box-shadow:0 0 0 3px rgba(74,61,122,.08)}
+.form-field textarea{min-height:80px;resize:vertical;line-height:1.55}
+.form-field.error input,.form-field.error textarea,.form-field.error select{border-color:#d9534f;background:#fef7f7}
+.form-field .err-msg{font-size:12px;color:#c0392b;margin-top:2px;display:none}
+.form-field.error .err-msg{display:block}
+
+.distance-input{display:flex;align-items:stretch;border:1.5px solid var(--g200);border-radius:8px;overflow:hidden;background:#fff;transition:border-color .15s,box-shadow .15s}
+.distance-input:focus-within{border-color:var(--purple-deep);box-shadow:0 0 0 3px rgba(74,61,122,.08)}
+.distance-input input{flex:1;border:0 !important;outline:none;background:transparent;font-family:inherit;font-size:14.5px;padding:12px 14px;color:var(--ink);min-width:0}
+.distance-input .unit{padding:0 14px;background:#f5f7fa;display:flex;align-items:center;font-size:13px;font-weight:500;color:var(--g600);border-left:1px solid #eef0f3}
+
+.radio-pills{display:flex;gap:8px;flex-wrap:wrap}
+.radio-pill{flex:1;min-width:140px;position:relative;cursor:pointer}
+.radio-pill input{position:absolute;opacity:0;pointer-events:none}
+.radio-pill span{display:block;padding:11px 16px;border-radius:8px;border:1.5px solid var(--g200);background:#fff;text-align:center;font-size:13.5px;font-weight:500;color:var(--g600);transition:.15s}
+.radio-pill:hover span{border-color:#c8ccd2;color:var(--ink)}
+.radio-pill input:checked ~ span{border-color:var(--purple-deep);background:var(--purple-soft);color:var(--purple-deep);font-weight:600}
+
+.basis-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.basis-cards{grid-template-columns:1fr}}
+.basis-card{position:relative;cursor:pointer}
+.basis-card input{position:absolute;opacity:0;pointer-events:none}
+.basis-card-inner{position:relative;padding:18px 16px;border-radius:12px;border:1.5px solid var(--g200);background:#fff;transition:.18s}
+.basis-card:hover .basis-card-inner{border-color:#c8ccd2}
+.basis-card input:checked ~ .basis-card-inner{border-color:var(--purple-deep);background:linear-gradient(180deg,var(--purple-soft),#fff)}
+.basis-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:var(--g100);color:var(--ink);font-family:var(--serif);font-size:13px;font-weight:600;letter-spacing:.04em;margin-bottom:12px;transition:.18s}
+.basis-card input:checked ~ .basis-card-inner .basis-icon{background:var(--purple-deep);color:#fff}
+.basis-title{font-size:14px;font-weight:600;line-height:1.3;color:var(--ink);margin-bottom:4px}
+.basis-desc{font-size:12px;line-height:1.5;color:var(--g600)}
+.basis-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--g200);display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;background:#fff;transition:.18s}
+.basis-card input:checked ~ .basis-card-inner .basis-check{background:var(--purple-deep);border-color:var(--purple-deep);color:#fff}
+
+.terms-box{background:#fbfcfd;border:1px solid var(--g200);border-radius:10px;max-height:280px;overflow-y:auto;padding:20px 22px;font-size:12.5px;line-height:1.7;color:var(--g600);margin-top:16px}
+.terms-box::-webkit-scrollbar{width:8px}
+.terms-box::-webkit-scrollbar-thumb{background:#d5d9e0;border-radius:4px}
+.terms-box ol{padding-left:20px;margin:0}
+.terms-box li{margin-bottom:10px}
+.terms-box li:last-child{margin-bottom:0}
+.terms-box b{color:var(--ink)}
+
+.sig-input{font-family:var(--serif);font-size:20px !important;letter-spacing:.02em;padding:14px !important}
+.sig-preview-wrap{margin-top:10px;padding:16px 20px;background:linear-gradient(180deg,#fbfcfd,#f5f7fa);border:1px dashed #ccd3dc;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.sig-preview{font-family:var(--script);font-size:32px;line-height:1.1;color:#b8c0cb;font-weight:500;transition:.2s}
+.sig-preview.has-name{color:var(--ink)}
+.sig-meta{font-size:11.5px;color:var(--g400);text-align:right}
+.sig-meta strong{color:var(--g600);font-weight:500}
+
+.checkbox-agree{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:16px;border:1.5px solid var(--g200);border-radius:10px;background:#fff;transition:.15s;margin-top:16px}
+.checkbox-agree:hover{border-color:#c8ccd2}
+.checkbox-agree input{width:20px;height:20px;flex-shrink:0;margin-top:1px;cursor:pointer;accent-color:var(--purple-deep)}
+.checkbox-agree-text{font-size:13.5px;line-height:1.55;color:var(--ink)}
+.checkbox-agree-text a{color:var(--purple-deep);font-weight:500}
+.checkbox-agree-text a:hover{text-decoration:underline}
+
+.file-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:32px 20px;border:2px dashed #ccd3dc;border-radius:12px;background:#fbfcfd;cursor:pointer;transition:.15s;text-align:center}
+.file-drop:hover,.file-drop.dragging{border-color:var(--purple-deep);background:var(--purple-soft)}
+.file-drop svg{width:36px;height:36px;stroke:var(--purple-deep);fill:none;stroke-width:1.5}
+.file-drop strong{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.file-drop span{display:block;font-size:12.5px;color:var(--g600)}
+.file-selected{display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:10px;background:var(--purple-soft);border:1px solid var(--purple-line);font-size:13.5px;color:var(--purple-deep)}
+.file-selected svg{width:18px;height:18px;stroke:var(--purple-deep);fill:none;stroke-width:2.2;flex-shrink:0}
+.file-selected .fname{flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-selected button{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--purple-deep);flex-shrink:0;font-size:14px;transition:background .15s}
+.file-selected button:hover{background:rgba(74,61,122,.12)}
+
+.submit-row{padding:26px 40px 34px;border-top:1px solid #eef0f3;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+@media(max-width:700px){.submit-row{padding:22px 22px 28px}}
+.submit-note{font-size:12.5px;color:var(--g600);line-height:1.55;flex:1;min-width:200px}
+.submit-btn{display:inline-flex;align-items:center;gap:10px;background:var(--purple-deep);color:#fff;padding:15px 30px;border-radius:100px;font-size:15px;font-weight:600;transition:.18s;min-width:220px;justify-content:center}
+.submit-btn:hover:not(:disabled){background:var(--purple);transform:translateY(-1px);box-shadow:0 12px 28px rgba(45,36,80,.3)}
+.submit-btn:disabled{opacity:.7;cursor:wait}
+.submit-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.submit-btn .spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Sidebar */
+.form-side{position:sticky;top:100px;display:flex;flex-direction:column;gap:16px}
+@media(max-width:1000px){.form-side{position:static}}
+.fee-card{background:linear-gradient(180deg,#2D2450 0%,#4A3D7A 100%);color:#fff;border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(45,36,80,.25)}
+.fee-card::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(237,180,88,.2),transparent 70%);pointer-events:none}
+.fee-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:10px}
+.fee-amount{font-family:var(--serif);font-size:42px;line-height:1.05;letter-spacing:-.5px;margin-bottom:4px;transition:all .2s}
+.fee-sub{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:22px}
+.fee-divider{height:1px;background:rgba(255,255,255,.12);margin:20px 0}
+.fee-list{list-style:none;margin-bottom:8px}
+.fee-list li{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;line-height:1.55;color:rgba(255,255,255,.86);padding:6px 0;gap:16px}
+.fee-list li > span:last-child{font-weight:600;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fee-list li.fee-list-total{border-top:1px solid rgba(255,255,255,.12);margin-top:6px;padding-top:12px;font-size:14px}
+.fee-list li.fee-list-total > span:first-child{color:#fff;font-weight:600}
+.fee-list li.fee-list-total > span:last-child{font-size:16px}
+.fee-note{font-size:11.5px;color:rgba(255,255,255,.55);line-height:1.55;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
+.fee-note a{color:var(--amber);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+
+.bank-block{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px;margin-top:14px}
+.bank-label{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600;margin-bottom:10px}
+.bank-row{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;line-height:1.5;gap:12px}
+.bank-row span:first-child{color:rgba(255,255,255,.6)}
+.bank-row span:last-child{color:#fff;font-weight:500;text-align:right}
+.bank-ref{margin-top:10px;padding:10px 12px;background:rgba(237,180,88,.15);border:1px dashed rgba(237,180,88,.4);border-radius:6px;font-size:12px;color:var(--amber);line-height:1.5}
+.bank-ref strong{color:#fff;font-weight:600;font-family:var(--serif);letter-spacing:.02em}
+
+.help-card{background:#fff;border:1px solid var(--g200);border-radius:12px;padding:22px}
+.help-card h4{font-size:14px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.help-card h4 svg{width:16px;height:16px;stroke:var(--purple-deep);fill:none;stroke-width:2}
+.help-card p{font-size:13px;color:var(--g600);line-height:1.6;margin-bottom:14px}
+.help-card a{display:inline-flex;align-items:center;gap:6px;color:var(--purple-deep);font-size:13.5px;font-weight:500}
+.help-card a:hover{text-decoration:underline}
+.help-card a svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ============ SUCCESS ============ */
+.success-section{padding:80px 0 100px;background:#fbfcfd;border-top:1px solid #eef0f3}
+.success-inner{max-width:760px;margin:0 auto;padding:0 var(--page-pad);text-align:center}
+.success-icon-lg{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#e8f5ec,#d4efdd);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;color:#1f7a3a;font-size:42px;font-weight:300;box-shadow:0 12px 32px rgba(31,122,58,.15);animation:pop .5s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.success-inner h1{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.6vw,40px);line-height:1.15;letter-spacing:-.3px;margin-bottom:14px}
+.success-inner .lede{font-size:16px;color:var(--g600);line-height:1.65;max-width:58ch;margin:0 auto 34px}
+.success-card{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:32px 34px;text-align:left;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.02)}
+.success-card h3{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--g600);margin-bottom:16px}
+.ref-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid #eef0f3;flex-wrap:wrap}
+.ref-row:last-child{border-bottom:0}
+.ref-row .label{font-size:13px;color:var(--g600)}
+.ref-row .value{font-size:14px;color:var(--ink);font-weight:600;text-align:right;word-break:break-word}
+.ref-row .value.mono{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:13.5px;letter-spacing:.02em}
+.success-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.success-actions button,.success-actions a{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:100px;font-size:14.5px;font-weight:600;transition:.15s}
+.success-actions .primary{background:var(--purple-deep);color:#fff}
+.success-actions .primary:hover{background:var(--purple);transform:translateY(-1px);box-shadow:0 12px 28px rgba(45,36,80,.3)}
+.success-actions .secondary{background:#fff;color:var(--ink);border:1.5px solid var(--g200)}
+.success-actions .secondary:hover{border-color:var(--ink)}
+.success-actions svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ============ QUOTE ============ */
+.quote-parallax{position:relative;min-height:400px;display:flex;align-items:center;justify-content:center;background-image:linear-gradient(180deg, rgba(45,36,80,.55), rgba(45,36,80,.78)),url('https://img.jamesedition.com/listing_images/2026/06/12/14/08/27/0216b76f-f82e-4c38-b6c0-4b9ce55e5614/je/2000xxs.jpg');background-size:cover;background-position:center;background-attachment:fixed;color:#fff;padding:80px var(--page-pad);text-align:center}
+@media(max-width:900px){.quote-parallax{background-attachment:scroll;min-height:320px;padding:60px 24px}}
+.quote-inner{max-width:820px}
+.quote-inner blockquote{font-family:var(--serif);font-weight:400;font-style:italic;font-size:clamp(22px,3vw,34px);line-height:1.35;letter-spacing:-.2px;margin-bottom:22px}
+.quote-inner blockquote::before,.quote-inner blockquote::after{color:var(--amber);font-size:1.1em}
+.quote-inner cite{font-style:normal;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:500}
+
+/* ============ FAQ ============ */
+.faq-section{padding:90px 0 100px;background:#fff}
+@media(max-width:700px){.faq-section{padding:60px 0 70px}}
+.faq-inner{max-width:820px;margin:0 auto;padding:0 var(--page-pad)}
+.faq-header{text-align:center;margin-bottom:44px}
+.faq-header h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,38px);line-height:1.15;letter-spacing:-.3px;margin-bottom:14px}
+.faq-header p{font-size:15px;color:var(--g600)}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{border:1px solid var(--g200);border-radius:12px;background:#fff;transition:.18s;overflow:hidden}
+.faq-item[open]{border-color:#cfd6e0;box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:15px;font-weight:600;color:var(--ink);transition:.15s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{background:#fbfcfd}
+.faq-item summary::after{content:'+';font-family:var(--serif);font-size:22px;font-weight:400;color:var(--g600);transition:transform .2s;flex-shrink:0;width:24px;text-align:center;line-height:1}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item p{padding:0 24px 22px;font-size:14px;line-height:1.7;color:var(--g600)}
+.faq-item p strong{color:var(--ink);font-weight:600}
+@media(max-width:700px){.faq-item summary{padding:16px 18px;font-size:14px}.faq-item p{padding:0 18px 18px;font-size:13.5px}}
+
+/* ============ FOOTER ============ */
+.footer{background:#f8f9fb;border-top:1px solid #eaeaea;padding:56px 0 24px;width:100%}
+.footer-top{max-width:1360px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.2fr 2fr;gap:60px;align-items:start}
+.footer-logo img{height:56px;width:auto;display:block}
+.footer-tagline{color:var(--g600);font-size:14px;margin-top:14px;max-width:300px;line-height:1.65}
+.footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.footer-col h4{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--g600);margin-bottom:14px}
+.footer-col a{display:block;font-size:14px;color:var(--ink);padding:6px 0;transition:color .15s}
+.footer-col a:hover{color:var(--purple-deep)}
+.footer-bottom{max-width:1360px;margin:44px auto 0;padding:24px 48px 0;border-top:1px solid #ececec;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--g600);flex-wrap:wrap;gap:12px}
+.footer-bottom .credit{color:var(--g400)}
+.footer-bottom .credit strong{color:var(--g600);font-weight:500}
+@media(max-width:900px){.footer-top{padding:0 24px;grid-template-columns:1fr;gap:36px}.footer-cols{grid-template-columns:repeat(2,1fr)}.footer-bottom{padding:24px 24px 0;flex-direction:column;text-align:center}}
+@media(max-width:500px){.footer-cols{grid-template-columns:1fr}}
+
+@media(max-width:1100px){ .pw-ai-fab{bottom:22px !important} }
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-top">
+    <button class="hdr-hamburger" id="hdrHamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobMenu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <a class="hdr-logo" href="/" aria-label="Property World Home">
+      <img src="logo.png" alt="Property World">
+    </a>
+    <div class="hdr-spacer"></div>
+    <nav class="hdr-links">
+      <a href="/brokerage">Brokerage</a>
+      <a href="/valuation" class="active">Valuation</a>
+      <a href="/property-management">Management</a>
+      <a href="/investment-consultancy">Investment</a>
+      <a href="/project-management">Projects</a>
+      <a href="/architecture">Architecture</a>
+      <a href="/listings">Listings</a>
+    </nav>
+    <a class="hdr-cta" href="#request">Request a valuation</a>
+  </div>
+  <div class="hdr-sub">
+    <a class="hdr-back" href="/">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to home
+    </a>
+    <div class="hdr-crumbs">
+      <a href="/valuation">Services</a> / <a href="/valuation">Valuation</a> / <span>Request an instruction</span>
+    </div>
+  </div>
+</header>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <div class="mob-menu-overlay" data-act="close-mob"></div>
+  <div class="mob-menu-drawer" role="dialog" aria-label="Main menu">
+    <div class="mob-menu-head">
+      <div class="mob-menu-logo"><img src="logo.png" alt="Property World"></div>
+      <button class="mob-menu-close" data-act="close-mob" aria-label="Close menu">×</button>
+    </div>
+    <nav class="mob-menu-nav">
+      <a href="/brokerage">Brokerage</a>
+      <a href="/valuation" class="active">Valuation</a>
+      <a href="/property-management">Management</a>
+      <a href="/investment-consultancy">Investment</a>
+      <a href="/project-management">Projects</a>
+      <a href="/architecture">Architecture</a>
+      <a href="/listings">Listings</a>
+    </nav>
+    <div class="mob-menu-actions">
+      <a class="hdr-cta" href="#request" data-act="close-mob">Request a valuation</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero-parallax">
+  <div class="hero-inner">
+    <h1>A valuation you can bank on.</h1>
+    <p class="lede">Bank-accepted and court-admissible property valuations across Botswana. Complete the instruction in minutes — our registered valuer handles the deeds search, site inspection, and signed report.</p>
+    <div class="hero-actions">
+      <a href="#calculator" class="btn-primary-lg">
+        Estimate your fee
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#request" class="btn-ghost-lg">Start the instruction</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEE CALCULATOR ============ -->
+<section class="calculator-section" id="calculator">
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-eyebrow">Fee calculator</div>
+      <h2>What will the valuation cost?</h2>
+      <p>Fees follow the Real Estate Institute of Botswana (REIB) published scale — a percentage of the Open Market Value. Enter a rough estimate to see your fee, deposit, travel, and balance.</p>
+    </header>
+
+    <div class="calc-card">
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <label for="calcValue">Estimated property value</label>
+          <div class="input-with-prefix">
+            <span class="prefix">P</span>
+            <input type="text" id="calcValue" inputmode="numeric" value="2,000,000" autocomplete="off">
+          </div>
+          <div class="calc-range">
+            <input type="range" id="calcValueSlider" min="0" max="20000000" step="50000" value="2000000" aria-label="Estimated property value">
+            <div class="range-labels"><span>P 0</span><span>P 20M</span></div>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Property type</label>
+          <div class="calc-type-pills">
+            <label class="calc-type-pill">
+              <input type="radio" name="calcType" value="standard" checked>
+              <span>Residential · Commercial · Industrial</span>
+            </label>
+            <label class="calc-type-pill">
+              <input type="radio" name="calcType" value="agricultural">
+              <span>Agricultural (farms &gt; 50 Ha)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label for="calcDistance">Distance from Gaborone <span class="hint">— round-trip km</span></label>
+          <div class="input-with-suffix">
+            <input type="text" id="calcDistance" inputmode="numeric" value="0" autocomplete="off">
+            <span class="suffix">km</span>
+          </div>
+          <div class="calc-hint">Travel is charged at P5.50/km round-trip. Leave 0 for properties within Gaborone.</div>
+        </div>
+      </div>
+
+      <div class="calc-output">
+        <div class="calc-output-row">
+          <span>Valuation fee</span>
+          <span id="calcFee">P 4,425</span>
+        </div>
+        <div class="calc-output-sub" id="calcFeeDetail">Basic P4,425 · no additional</div>
+
+        <div class="calc-output-row">
+          <span>Travel</span>
+          <span id="calcTravel">P 0</span>
+        </div>
+        <div class="calc-output-sub" id="calcTravelDetail">0 km round-trip · P0</div>
+
+        <div class="calc-divider"></div>
+
+        <div class="calc-total-row">
+          <span>Estimated total</span>
+          <span id="calcTotal">P 4,425</span>
+        </div>
+
+        <div class="calc-output-row small">
+          <span>Deposit (payable now)</span>
+          <span id="calcDeposit">P 1,500</span>
+        </div>
+        <div class="calc-output-row small">
+          <span>Balance at collection</span>
+          <span id="calcBalance">P 2,925</span>
+        </div>
+
+        <a href="#schedule" class="calc-schedule-link">
+          View the full REIB fee schedule
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="calc-note">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg>
+      <div>This is an estimate only. The final fee is determined by our valuer after inspection, based on the Open Market Value, and may include additional charges per REIB — for example prescribed forms, additional valuations, or disbursements. Your instruction PDF records the amount of the deposit you have paid; the balance is settled before the report is released.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEE SCHEDULE ============ -->
+<section class="schedule-section" id="schedule">
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-eyebrow">REIB fee schedule</div>
+      <h2>How fees are calculated</h2>
+      <p>Property World follows the Real Estate Institute of Botswana (REIB) published scale. Every fee below is the tariff — no markups. Tap any section to view the brackets.</p>
+    </header>
+
+    <div class="schedule-list">
+      <details class="schedule-item" open>
+        <summary>Residential, Commercial &amp; Industrial</summary>
+        <div class="schedule-body">
+          <div class="fee-table-wrap">
+            <table class="fee-table">
+              <thead>
+                <tr><th>Market value of property</th><th>Basic tariff</th><th>Additional to basic tariff</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Up to P50,000</td><td>P750</td><td>—</td></tr>
+                <tr><td>P50,001 – P150,000</td><td>P750</td><td>P3.50 per P1,000 over P50,000</td></tr>
+                <tr><td>P150,001 – P400,000</td><td>P1,100</td><td>P2.50 per P1,000 over P150,000</td></tr>
+                <tr><td>P400,001 – P1,000,000</td><td>P1,725</td><td>P2.00 per P1,000 over P400,000</td></tr>
+                <tr><td>P1,000,001 – P2,000,000</td><td>P2,925</td><td>P1.50 per P1,000 over P1,000,000</td></tr>
+                <tr><td>P2,000,001 – P3,000,000</td><td>P4,425</td><td>P1.00 per P1,000 over P2,000,000</td></tr>
+                <tr><td>P3,000,001 – P4,000,000</td><td>P5,425</td><td>P0.75 per P1,000 over P3,000,000</td></tr>
+                <tr><td>P4,000,001 – P5,000,000</td><td>P6,175</td><td>P0.50 per P1,000 over P4,000,000</td></tr>
+                <tr><td>Over P5,000,000</td><td>P6,625</td><td>P0.25 per P1,000 over P5,000,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="schedule-item">
+        <summary>Agricultural properties (farms &gt; 50 hectares)</summary>
+        <div class="schedule-body">
+          <div class="fee-table-wrap">
+            <table class="fee-table">
+              <thead>
+                <tr><th>Value of property</th><th>Basic tariff</th><th>Additional to basic tariff</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Up to P50,000</td><td>P1,000</td><td>—</td></tr>
+                <tr><td>P50,001 – P100,000</td><td>P1,000</td><td>P5.00 per P1,000 over P50,000</td></tr>
+                <tr><td>P100,001 – P250,000</td><td>P1,250</td><td>P3.50 per P1,000 over P100,000</td></tr>
+                <tr><td>Over P250,000</td><td>P1,775</td><td>P2.50 per P1,000 over P250,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:12px;color:var(--g400);margin-top:10px;line-height:1.5">Minimum fee of P1,000 applies to agricultural properties.</p>
+        </div>
+      </details>
+
+      <details class="schedule-item">
+        <summary>Other provisions that may apply</summary>
+        <div class="schedule-body">
+          <ul class="clause-list">
+            <li><span class="clause-num">1.2.1</span><div><strong>Additional valuations on the same property</strong> — charged at 5% of the first valuation fee. A normal valuation including the forced sale value alongside the open market value does not count as more than one valuation.</div></li>
+            <li><span class="clause-num">1.3</span><div><strong>Prescribed forms</strong> — if a specific form is required in addition to the valuation, the fee may increase by 25%, up to a maximum increase of P250 per property.</div></li>
+            <li><span class="clause-num">1.5</span><div><strong>Revaluation within 12 months</strong> — where the property has not changed materially, the fee is reduced by 50% of the first valuation.</div></li>
+            <li><span class="clause-num">1.7</span><div><strong>"As is" and "proposed" valuations</strong> — charged separately per the scale, unless the second valuation does not amount to a completely separate valuation, in which case a single fee on the higher value applies.</div></li>
+            <li><span class="clause-num">1.8</span><div><strong>Partial property or undivided share</strong> — where it is necessary to value the whole property to determine the value of the part, the fee may be based on the value of the whole property.</div></li>
+            <li><span class="clause-num">2.0</span><div><strong>Time charges</strong> — for market research, deeds registry searches, or other investigations: P750/hr for a Fellow (15+ years), P600/hr (Fellow, &lt;15 years), P500/hr (Full, 10+ years), P350/hr (Full, &lt;10 years), P200/hr (Probationer, 3+ years), P150/hr (Probationer, &lt;3 years).</div></li>
+            <li><span class="clause-num">10.1</span><div><strong>Travel</strong> — per Property World's published instruction, travel in our own vehicle is charged at P5.50 per kilometre. Public transport and hired conveyances are charged at actual cost.</div></li>
+            <li><span class="clause-num">11.0</span><div><strong>Disbursements</strong> — purchase and preparation of plans and drawings, external expert advice, typing and secretarial fees (15% of the time charge), postage, phone calls, photocopies and other incidentals are charged at cost.</div></li>
+            <li><span class="clause-num">15.0</span><div><strong>Deposits</strong> — a deposit of P1,500 (within Gaborone) or P2,000 (outside Gaborone) is payable per instruction before we commence work. This is a payment on account of our fees, not a separate charge.</div></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how-section" id="how">
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-eyebrow">How it works</div>
+      <h2>Three steps. One signed report.</h2>
+      <p>Everything is handled online — no need to visit our offices. Your instruction is generated, signed, and recorded the moment you submit the form.</p>
+    </header>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Complete the instruction</h3>
+        <p>Fill in your details, the property (Lot + Extension), and the basis you need: Open Market Value, Forced Sale Value, Replacement Cost Value, or all three. One fee applies to the basis of OMV, per the REIB scale.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Pay the deposit &amp; upload proof</h3>
+        <p>P1,500 for properties within Gaborone, P2,000 outside. Travel beyond Gaborone is charged separately at P5.50/km round-trip. Transfer to our FNB account, attach the proof of payment, and enter your approximate distance.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Sign &amp; receive your report</h3>
+        <p>Type your full name to sign — your signed instruction PDF is generated instantly. We inspect, value, and deliver the report within 5–7 business days, and any balance is settled before collection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REQUEST FORM ============ -->
+<section class="request-section" id="request">
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-eyebrow">Valuation instruction form</div>
+      <h2>Request a valuation</h2>
+      <p>Fields marked <span style="color:#c0392b;font-weight:700">*</span> are required. Your signed instruction PDF is generated on submit — save a copy for your records and forward it to your bank if needed.</p>
+    </header>
+
+    <div class="request-layout">
+      <form class="form-main" id="valuationForm" novalidate>
+
+        <!-- 1. Applicant -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="section-num">1</div>
+            <div>
+              <h3>Applicant details</h3>
+              <p>The individual or company instructing Property World.</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-field full" data-field="name">
+              <label for="fullName">Name / Company <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" placeholder="e.g. Kefilwe Real Estate (Pty) Ltd" autocomplete="organization">
+              <div class="err-msg">Please enter the name or company on the instruction.</div>
+            </div>
+            <div class="form-field" data-field="phone">
+              <label for="phone">Phone / Fax <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="+267 71 234 567" autocomplete="tel">
+              <div class="err-msg">Please provide a contact phone number.</div>
+            </div>
+            <div class="form-field" data-field="email">
+              <label for="email">Email address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@company.co.bw" autocomplete="email">
+              <div class="err-msg">Please enter a valid email address.</div>
+            </div>
+            <div class="form-field full" data-field="postalAddress">
+              <label for="postalAddress">Postal address <span class="req">*</span></label>
+              <input type="text" id="postalAddress" name="postalAddress" placeholder="P O Box 12345, Gaborone" autocomplete="postal-code">
+              <div class="err-msg">Please provide a postal address.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Property -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="section-num">2</div>
+            <div>
+              <h3>Property details</h3>
+              <p>The property you'd like valued. We'll search the deeds registry ourselves.</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-field" data-field="lotNumber">
+              <label for="lotNumber">Lot number <span class="req">*</span></label>
+              <input type="text" id="lotNumber" name="lotNumber" placeholder="e.g. 54368">
+              <div class="err-msg">Please provide the Lot number.</div>
+            </div>
+            <div class="form-field">
+              <label for="extension">Extension <span class="hint">(optional)</span></label>
+              <input type="text" id="extension" name="extension" placeholder="e.g. 12">
+            </div>
+            <div class="form-field full" data-field="physicalLocation">
+              <label for="physicalLocation">Physical location <span class="req">*</span></label>
+              <input type="text" id="physicalLocation" name="physicalLocation" placeholder="e.g. Plot 54368, Block 8, Gaborone">
+              <div class="err-msg">Please provide the physical location.</div>
+            </div>
+            <div class="form-field full" data-field="location">
+              <label>Valuation location <span class="req">*</span><span class="hint">— sets the deposit amount</span></label>
+              <div class="radio-pills">
+                <label class="radio-pill">
+                  <input type="radio" name="location" value="gaborone" checked>
+                  <span>Within Gaborone — P1,500 deposit</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="location" value="outside">
+                  <span>Outside Gaborone — P2,000 deposit</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-field full">
+              <label for="distance">Distance from Gaborone <span class="hint">— round-trip km, used for travel estimate</span></label>
+              <div class="distance-input">
+                <input type="text" id="distance" name="distance" inputmode="numeric" value="0" autocomplete="off">
+                <span class="unit">km</span>
+              </div>
+              <div class="err-msg" style="font-size:12px;color:var(--g600);margin-top:6px">Leave 0 for properties within Gaborone. Travel is P5.50/km round-trip.</div>
+            </div>
+            <div class="form-field">
+              <label for="contactPerson">Access contact person <span class="hint">(optional)</span></label>
+              <input type="text" id="contactPerson" name="contactPerson" placeholder="Who can grant site access">
+            </div>
+            <div class="form-field">
+              <label for="contactMobile">Access contact mobile <span class="hint">(optional)</span></label>
+              <input type="tel" id="contactMobile" name="contactMobile" placeholder="+267 …">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Scope -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="section-num">3</div>
+            <div>
+              <h3>Valuation scope</h3>
+              <p>Select the basis you need and tell us what the valuation is for.</p>
+            </div>
+          </div>
+
+          <label style="display:block;font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--g600);text-transform:uppercase;margin-bottom:10px">Valuation basis <span style="color:#c0392b;font-weight:700">*</span></label>
+          <div class="basis-cards" data-field="basis">
+            <label class="basis-card">
+              <input type="checkbox" name="basis" value="OMV" checked>
+              <div class="basis-card-inner">
+                <div class="basis-icon">OMV</div>
+                <div class="basis-title">Open Market Value</div>
+                <div class="basis-desc">Estimated sale price between a willing buyer and seller, both fully informed.</div>
+                <div class="basis-check">✓</div>
+              </div>
+            </label>
+            <label class="basis-card">
+              <input type="checkbox" name="basis" value="FSV">
+              <div class="basis-card-inner">
+                <div class="basis-icon">FSV</div>
+                <div class="basis-title">Forced Sale Value</div>
+                <div class="basis-desc">Realistic recovery value under a forced sale — typically below OMV.</div>
+                <div class="basis-check">✓</div>
+              </div>
+            </label>
+            <label class="basis-card">
+              <input type="checkbox" name="basis" value="RCV">
+              <div class="basis-card-inner">
+                <div class="basis-icon">RCV</div>
+                <div class="basis-title">Replacement Cost Value</div>
+                <div class="basis-desc">Cost to rebuild from scratch — typically used for insurance.</div>
+                <div class="basis-check">✓</div>
+              </div>
+            </label>
+          </div>
+          <div style="font-size:12px;color:var(--g600);margin-top:10px;line-height:1.5">
+            Per REIB 1.2.1, FSV alongside OMV does not constitute more than one valuation. One fee applies regardless of basis.
+          </div>
+          <div class="err-msg" style="color:#c0392b;font-size:12px;margin-top:8px;display:none" id="basisError">Select at least one valuation basis.</div>
+
+          <div class="form-grid" style="margin-top:20px">
+            <div class="form-field" data-field="purpose">
+              <label for="purpose">Purpose of valuation <span class="req">*</span></label>
+              <input type="text" id="purpose" name="purpose" list="purposesList" placeholder="e.g. Mortgage finance">
+              <datalist id="purposesList">
+                <option value="Mortgage finance / bond"></option>
+                <option value="Insurance reinstatement"></option>
+                <option value="Sale / disposal"></option>
+                <option value="Purchase"></option>
+                <option value="Estate planning"></option>
+                <option value="Divorce settlement"></option>
+                <option value="Litigation / court"></option>
+                <option value="Financial reporting"></option>
+                <option value="Other"></option>
+              </datalist>
+              <div class="err-msg">Please tell us the purpose of the valuation.</div>
+            </div>
+            <div class="form-field">
+              <label for="bank">Bank / institution <span class="hint">(if applicable)</span></label>
+              <input type="text" id="bank" name="bank" list="banksList" placeholder="e.g. FNB Botswana">
+              <datalist id="banksList">
+                <option value="FNB Botswana"></option>
+                <option value="Absa Bank Botswana"></option>
+                <option value="Standard Chartered Botswana"></option>
+                <option value="Stanbic Bank Botswana"></option>
+                <option value="Bank of Baroda Botswana"></option>
+                <option value="Bank Gaborone"></option>
+                <option value="BancABC Botswana"></option>
+                <option value="First Capital Bank"></option>
+                <option value="Other"></option>
+              </datalist>
+            </div>
+            <div class="form-field full">
+              <label for="capacity">Signing capacity <span class="hint">(defaults to "Director")</span></label>
+              <input type="text" id="capacity" name="capacity" placeholder="e.g. Director, Owner, Trustee, Managing Director">
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Proof of payment -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="section-num">4</div>
+            <div>
+              <h3>Proof of payment</h3>
+              <p>Bank details are in the panel on the right. Attach a screenshot or PDF of your transfer — we'll match it against your reference.</p>
+            </div>
+          </div>
+
+          <label class="file-drop" id="fileDrop" for="proofFile">
+            <input type="file" id="proofFile" name="proofFile" accept="image/*,application/pdf" hidden>
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            <div>
+              <strong>Click to upload</strong>
+              <span>or drag and drop — PDF, JPG, PNG · max 10MB</span>
+            </div>
+          </label>
+          <div class="file-selected hidden" id="fileSelected">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            <span class="fname" id="fileName">—</span>
+            <button type="button" id="fileClear" aria-label="Remove file">×</button>
+          </div>
+          <div class="err-msg" style="color:#c0392b;font-size:12px;margin-top:8px;display:none" id="fileError">Please upload your proof of payment.</div>
+        </div>
+
+        <!-- 5. Signature -->
+        <div class="form-section">
+          <div class="form-section-head">
+            <div class="section-num">5</div>
+            <div>
+              <h3>Signature &amp; agreement</h3>
+              <p>Please read and accept the terms below, then sign electronically.</p>
+            </div>
+          </div>
+
+          <div class="terms-box">
+            <ol>
+              <li><b>To report on the <span data-term-basis>OMV</span> values.</b></li>
+              <li><b>The valuation is for <span data-term-purpose>[purpose]</span><span data-term-bank></span> purposes.</b></li>
+              <li>I/we accept your fees for the valuation of the land &amp; buildings will be due on collection of the report. The fees will be based on the Real Estate Institute of Botswana fee scales and will be calculated as a percentage of Open Market Value.</li>
+              <li>I/we agree that additional expenses will be charged on the basis of actual cost reasonably incurred, with travel in our own vehicle being charged at P5.50 per kilometer and deeds searches.</li>
+              <li>We will proceed with your instructions after you deposit with us the sum of <b>P<span data-term-deposit>1,500.00</span></b> being a payment on account of our fees and expenses. The deposit outside Gaborone shall be P2,000.00.</li>
+              <li>The full fees shall be settled before the valuation reports are dispatched/collected.</li>
+              <li>In the event of our fee charges remaining unpaid for more than 30 days, forcing us to recover through attorneys, it is specifically agreed that all legal and administrative costs incidental to the claim and costs on attorney and clients scale together with 10% collection commission including interest at 4% per month will be recovered from you by the collecting attorneys.</li>
+              <li>By copy of this letter I/we authorize you to carry out a search of the titles/s of the property/ies to be valued at the office of the Registrar of Deeds.</li>
+              <li>By appending my signature hereto I in my capacity as <span data-term-capacity>Director</span> do hereby bind myself as co-principal debtor and surety with the company. I hereby renounce all benefits of exclusion and division.</li>
+            </ol>
+          </div>
+
+          <div class="form-field full" style="margin-top:20px" data-field="signature">
+            <label for="signature">Type your full name to sign <span class="req">*</span></label>
+            <input type="text" id="signature" name="signature" class="sig-input" placeholder="e.g. Thabo M. Sekgoma" autocomplete="name">
+            <div class="sig-preview-wrap">
+              <div class="sig-preview" id="sigPreview">— your signature —</div>
+              <div class="sig-meta">Signed electronically on <strong id="sigDate">today</strong></div>
+            </div>
+            <div class="err-msg">Your typed name is your electronic signature.</div>
+          </div>
+
+          <label class="checkbox-agree" data-field="agree">
+            <input type="checkbox" id="agree" name="agree">
+            <span class="checkbox-agree-text">
+              I confirm I have read and accept the <b>Valuation Instruction Terms</b> above, and I agree to be bound as co-principal debtor and surety as described in clause 9. I understand this typed name constitutes my electronic signature. See our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+            </span>
+          </label>
+          <div class="err-msg" style="color:#c0392b;font-size:12px;margin-top:8px;display:none" id="agreeError">You must accept the terms to submit.</div>
+        </div>
+
+        <div class="submit-row">
+          <div class="submit-note">
+            On submit, your signed instruction PDF is generated and shown to you for download. You'll receive a confirmation email from Property World within 1 business day.
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">
+            Sign &amp; submit request
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <aside class="form-side">
+        <div class="fee-card">
+          <div class="fee-label">Due on submission</div>
+          <div class="fee-amount" id="dueAmount">P 1,500.00</div>
+          <div class="fee-sub" id="dueSub">Deposit — within Gaborone</div>
+          <div class="fee-divider"></div>
+          <ul class="fee-list">
+            <li><span>Deposit</span><span id="sideDeposit">P 1,500.00</span></li>
+            <li><span>Travel <span style="color:rgba(255,255,255,.5);font-size:11.5px" id="sideKm">(0 km)</span></span><span id="sideTravel">P 0.00</span></li>
+            <li class="fee-list-total"><span>Total due now</span><span id="sideTotal">P 1,500.00</span></li>
+          </ul>
+          <div class="fee-note">
+            The final valuation fee is calculated after inspection based on Open Market Value, per the <a href="#schedule">REIB scale</a>. Any balance is settled before your report is released.
+          </div>
+
+          <div class="bank-block">
+            <div class="bank-label">Bank transfer</div>
+            <div class="bank-row"><span>Bank</span><span>FNB Botswana</span></div>
+            <div class="bank-row"><span>Account</span><span>Propertyworld (Pty) Ltd</span></div>
+            <div class="bank-row"><span>Number</span><span>62 34 000 0000</span></div>
+            <div class="bank-row"><span>Branch</span><span>282467 (iTowers)</span></div>
+            <div class="bank-ref">
+              Reference: <strong>LOT-[your lot]</strong><br>
+              e.g. LOT-54368 — so we can match your payment instantly.
+            </div>
+          </div>
+        </div>
+
+        <div class="help-card">
+          <h4>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2 2-2 3.5M12 17h.01"/></svg>
+            Need help?
+          </h4>
+          <p>Our valuation team can walk you through the form, clarify fees, or arrange a call with the valuer.</p>
+          <a href="tel:+2673972039">Call (267) 3972039 <svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a><br>
+          <a href="mailto:valuations@pw.co.bw" style="margin-top:6px">valuations@pw.co.bw <svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUCCESS ============ -->
+<section class="success-section hidden" id="successState">
+  <div class="success-inner">
+    <div class="success-icon-lg">✓</div>
+    <h1>Instruction received.</h1>
+    <p class="lede" id="successLede">Your signed valuation instruction PDF has been generated. A copy is on file with our valuation team — they will be in touch within 1 business day.</p>
+
+    <div class="success-card">
+      <h3>Instruction summary</h3>
+      <div class="ref-row"><span class="label">Reference</span><span class="value mono" id="sRef">—</span></div>
+      <div class="ref-row"><span class="label">Applicant</span><span class="value" id="sName">—</span></div>
+      <div class="ref-row"><span class="label">Property</span><span class="value" id="sProperty">—</span></div>
+      <div class="ref-row"><span class="label">Valuation basis</span><span class="value" id="sBasis">—</span></div>
+      <div class="ref-row"><span class="label">Purpose</span><span class="value" id="sPurpose">—</span></div>
+      <div class="ref-row"><span class="label">Deposit</span><span class="value" id="sDeposit">—</span></div>
+      <div class="ref-row"><span class="label">Travel estimate</span><span class="value" id="sTravel">—</span></div>
+      <div class="ref-row"><span class="label">Signed by</span><span class="value" id="sSigned">—</span></div>
+    </div>
+
+    <div class="success-actions">
+      <a class="primary" id="downloadPdfBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        Download instruction PDF
+      </a>
+      <button class="secondary" id="newRequestBtn" type="button">
+        Make another request
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE ============ -->
+<section class="quote-parallax">
+  <div class="quote-inner">
+    <blockquote>A valuation you can stand behind — in the bank's eyes, in a courtroom, and in the market.</blockquote>
+    <cite>Property World · Valuation Services</cite>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <h2>Common questions</h2>
+      <p>A few things clients ask before they instruct us.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>How is my valuation fee calculated?</summary>
+        <p>Fees follow the <strong>REIB scale</strong> — a basic tariff plus an additional amount per P1,000 over the previous bracket, applied to the Open Market Value determined by our valuer after inspection. Use the <a href="#calculator" style="color:var(--purple-deep);text-decoration:underline">calculator</a> above for a quick estimate. The <a href="#schedule" style="color:var(--purple-deep);text-decoration:underline">full fee schedule</a> is published further down.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is travel included in the deposit?</summary>
+        <p><strong>No.</strong> The deposit (P1,500 within Gaborone, P2,000 outside) is a payment on account of the valuation fee itself. Travel is charged separately at <strong>P5.50 per kilometre round-trip</strong> beyond Gaborone. Enter your round-trip distance on the form and the sidebar updates with the travel estimate.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What's the difference between OMV, FSV and RCV?</summary>
+        <p><strong>OMV (Open Market Value)</strong> is the estimated price between a willing buyer and seller, both fully informed. <strong>FSV (Forced Sale Value)</strong> is what you'd realistically realise under a forced sale — typically 10–30% below OMV. <strong>RCV (Replacement Cost Value)</strong> is the cost to rebuild from scratch, used mainly for insurance. Per REIB 1.2.1, FSV alongside OMV doesn't count as a second valuation — one fee applies regardless of which bases you request.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How long does a valuation take?</summary>
+        <p>Standard turnaround is <strong>5–7 business days</strong> from the date we receive your signed instruction and proof of payment. Complex or rural properties may take longer — we'll confirm the timeline once we've reviewed the file.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if I need more than one property valued?</summary>
+        <p>Each property is valued and charged separately per the REIB scale. The deposit is charged <strong>once per instruction</strong>, not per property — so instructing us on three properties at the same time means one deposit plus three valuation fees. Let us know in the notes field or via email and we'll prepare a consolidated instruction.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you charge extra for a revaluation?</summary>
+        <p>Per REIB 1.5, a revaluation of the same property by the same valuer within 12 months — where the property hasn't changed materially — is charged at <strong>50% of the first valuation fee</strong>. Beyond 12 months, standard rates apply.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is my electronic signature legally binding?</summary>
+        <p>Yes. Your typed name, together with the acceptance of the instruction terms and the automated timestamp, constitutes a valid electronic signature for the purposes of the instruction. The signed PDF — with terms, signature, and date — is generated on submission and is the authoritative record.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="footer-logo" href="/" aria-label="Property World Home">
+        <img src="logo.png" alt="Property World">
+      </a>
+      <p class="footer-tagline">A complete property practice — brokerage, valuation, management, consulting, projects, and architecture under one roof.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/brokerage">Brokerage</a>
+        <a href="/valuation">Valuation</a>
+        <a href="/property-management">Property Management</a>
+        <a href="/investment-consultancy">Investment Consulting</a>
+        <a href="/project-management">Project Management</a>
+        <a href="/architecture">Architecture</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/listings">Listings</a>
+        <a href="/brokerage">List your property</a>
+        <a href="/valuation">Request a valuation</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Fair Housing</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Property World. All rights reserved.</div>
+    <div class="credit">Built by <strong>Vernon Clive Kawonza</strong></div>
+  </div>
+</footer>
+
+<script src="property-ai.js"></script>
+<script>
+/* =========================================================
+   Helpers
+   ========================================================= */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const money = n => 'P ' + Number(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+const moneyRound = n => 'P ' + Math.round(n).toLocaleString('en-US');
+const isEmail = v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+const digitsOnly = s => s.replace(/[^\d]/g, '');
+
+const DRAFT_KEY = 'pw-valuation-draft';
+const TRAVEL_RATE = 5.50;
+const DEPOSIT_GABS = 1500;
+const DEPOSIT_OUTSIDE = 2000;
+
+/* Map server error field keys → our data-field wrapper keys */
+const SERVER_FIELD_MAP = {
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  postalAddress: 'postalAddress',
+  lotNumber: 'lotNumber',
+  physicalLocation: 'physicalLocation',
+  purpose: 'purpose',
+  signature: 'signature',
+  agree: 'agree'
+};
+
+/* =========================================================
+   REIB Fee Schedule
+   ========================================================= */
+const STANDARD_BRACKETS = [
+  { min: 0,       max: 50000,   basic: 750,  rate: 0,    over: 0 },
+  { min: 50000,   max: 150000,  basic: 750,  rate: 3.50, over: 50000 },
+  { min: 150000,  max: 400000,  basic: 1100, rate: 2.50, over: 150000 },
+  { min: 400000,  max: 1000000, basic: 1725, rate: 2.00, over: 400000 },
+  { min: 1000000, max: 2000000, basic: 2925, rate: 1.50, over: 1000000 },
+  { min: 2000000, max: 3000000, basic: 4425, rate: 1.00, over: 2000000 },
+  { min: 3000000, max: 4000000, basic: 5425, rate: 0.75, over: 3000000 },
+  { min: 4000000, max: 5000000, basic: 6175, rate: 0.50, over: 4000000 },
+  { min: 5000000, max: Infinity, basic: 6625, rate: 0.25, over: 5000000 }
+];
+
+const AGRI_BRACKETS = [
+  { min: 0,       max: 50000,   basic: 1000, rate: 0,    over: 0 },
+  { min: 50000,   max: 100000,  basic: 1000, rate: 5.00, over: 50000 },
+  { min: 100000,  max: 250000,  basic: 1250, rate: 3.50, over: 100000 },
+  { min: 250000,  max: Infinity, basic: 1775, rate: 2.50, over: 250000 }
+];
+
+function calcFee(value, type){
+  const brackets = type === 'agricultural' ? AGRI_BRACKETS : STANDARD_BRACKETS;
+  const v = Math.max(0, Number(value) || 0);
+  let bracket = brackets[brackets.length - 1];
+  for (let i = 0; i < brackets.length; i++){
+    if (v <= brackets[i].max) { bracket = brackets[i]; break; }
+  }
+  const additional = bracket.rate > 0 ? (v - bracket.over) * bracket.rate / 1000 : 0;
+  return {
+    basic: bracket.basic,
+    additional: Math.max(0, additional),
+    total: bracket.basic + Math.max(0, additional),
+    bracket
+  };
+}
+
+function calcTravel(km){
+  const k = Math.max(0, Number(km) || 0);
+  return k * TRAVEL_RATE;
+}
+
+/* =========================================================
+   Calculator
+   ========================================================= */
+const calcValue = $('#calcValue');
+const calcValueSlider = $('#calcValueSlider');
+const calcDistance = $('#calcDistance');
+const calcTypeRadios = $$('input[name="calcType"]');
+
+function currentCalcType(){
+  const r = calcTypeRadios.find(x => x.checked);
+  return r ? r.value : 'standard';
+}
+function currentCalcValue(){ return Number(digitsOnly(calcValue.value)) || 0; }
+function currentCalcDistance(){ return Number(digitsOnly(calcDistance.value)) || 0; }
+
+function updateCalculator(){
+  const v = currentCalcValue();
+  const t = currentCalcType();
+  const d = currentCalcDistance();
+
+  const fee = calcFee(v, t);
+  const travel = calcTravel(d);
+  const deposit = DEPOSIT_GABS;
+  const total = fee.total + travel;
+  const balance = Math.max(0, total - deposit);
+
+  $('#calcFee').textContent = moneyRound(fee.total);
+  const basicLabel = `Basic ${moneyRound(fee.basic)}`;
+  const additionalLabel = fee.additional > 0
+    ? `plus ${moneyRound(fee.additional)} additional`
+    : 'no additional';
+  $('#calcFeeDetail').textContent = `${basicLabel} · ${additionalLabel}`;
+
+  $('#calcTravel').textContent = moneyRound(travel);
+  $('#calcTravelDetail').textContent = d > 0
+    ? `${d.toLocaleString()} km round-trip × P${TRAVEL_RATE.toFixed(2)}`
+    : 'No travel beyond Gaborone';
+
+  $('#calcTotal').textContent = moneyRound(total);
+  $('#calcDeposit').textContent = moneyRound(deposit);
+  $('#calcBalance').textContent = moneyRound(balance);
+}
+
+calcValue.addEventListener('input', () => {
+  const digits = digitsOnly(calcValue.value);
+  calcValue.value = digits ? Number(digits).toLocaleString('en-US') : '';
+  const n = Number(digits) || 0;
+  calcValueSlider.value = Math.min(20000000, Math.max(0, n));
+  updateCalculator();
+});
+calcValueSlider.addEventListener('input', () => {
+  calcValue.value = Number(calcValueSlider.value).toLocaleString('en-US');
+  updateCalculator();
+});
+calcDistance.addEventListener('input', () => {
+  const d = digitsOnly(calcDistance.value);
+  calcDistance.value = d ? Number(d).toLocaleString('en-US') : '';
+  updateCalculator();
+});
+calcTypeRadios.forEach(r => r.addEventListener('change', updateCalculator));
+updateCalculator();
+
+/* =========================================================
+   Form / sidebar live updates
+   ========================================================= */
+const form = $('#valuationForm');
+const submitBtn = $('#submitBtn');
+const locationRadios = $$('input[name="location"]');
+const distanceInput = $('#distance');
+const sigInput = $('#signature');
+const sigPreview = $('#sigPreview');
+const sigDate = $('#sigDate');
+
+const todayFormatted = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' });
+sigDate.textContent = todayFormatted;
+
+function currentLocation(){
+  const r = locationRadios.find(x => x.checked);
+  return r ? r.value : 'gaborone';
+}
+function currentFormDistance(){ return Number(digitsOnly(distanceInput.value)) || 0; }
+
+function updateSidebar(){
+  const outside = currentLocation() === 'outside';
+  const deposit = outside ? DEPOSIT_OUTSIDE : DEPOSIT_GABS;
+  const km = currentFormDistance();
+  const travel = calcTravel(km);
+  const total = deposit + travel;
+
+  $('#dueAmount').textContent = money(total);
+  $('#dueSub').textContent = (outside ? 'Deposit outside Gaborone' : 'Deposit within Gaborone') + (km > 0 ? ' + travel' : '');
+
+  $('#sideDeposit').textContent = money(deposit);
+  $('#sideTravel').textContent = money(travel);
+  $('#sideKm').textContent = `(${km.toLocaleString()} km)`;
+  $('#sideTotal').textContent = money(total);
+
+  $$('[data-term-deposit]').forEach(el => {
+    el.textContent = outside ? '2,000.00' : '1,500.00';
+  });
+}
+
+locationRadios.forEach(r => r.addEventListener('change', updateSidebar));
+distanceInput.addEventListener('input', () => {
+  const d = digitsOnly(distanceInput.value);
+  distanceInput.value = d ? Number(d).toLocaleString('en-US') : '';
+  updateSidebar();
+});
+updateSidebar();
+
+/* =========================================================
+   Live term preview
+   ========================================================= */
+function syncTerms(){
+  const purpose = $('#purpose').value.trim() || '[purpose]';
+  const bank = $('#bank').value.trim();
+  const capacity = $('#capacity').value.trim() || 'Director';
+  const basis = $$('input[name="basis"]:checked').map(x => x.value);
+  const basisText = basis.length ? basis.join(', ') : 'OMV';
+
+  $$('[data-term-purpose]').forEach(el => el.textContent = purpose);
+  $$('[data-term-bank]').forEach(el => el.textContent = bank ? ` (${bank})` : '');
+  $$('[data-term-capacity]').forEach(el => el.textContent = capacity);
+  $$('[data-term-basis]').forEach(el => el.textContent = basisText);
+}
+['purpose','bank','capacity'].forEach(id => {
+  document.getElementById(id).addEventListener('input', syncTerms);
+});
+$$('input[name="basis"]').forEach(c => c.addEventListener('change', syncTerms));
+syncTerms();
+
+/* =========================================================
+   Signature preview
+   ========================================================= */
+sigInput.addEventListener('input', () => {
+  const val = sigInput.value.trim();
+  if (val) {
+    sigPreview.textContent = val;
+    sigPreview.classList.add('has-name');
+  } else {
+    sigPreview.textContent = '— your signature —';
+    sigPreview.classList.remove('has-name');
+  }
+});
+
+/* =========================================================
+   File upload — proof of payment
+   ========================================================= */
+const fileDrop = $('#fileDrop');
+const proofFile = $('#proofFile');
+const fileSelected = $('#fileSelected');
+const fileName = $('#fileName');
+const fileClear = $('#fileClear');
+const fileError = $('#fileError');
+let uploadedFile = null;
+
+function setFile(f){
+  if (!f) return;
+  if (f.size > 10 * 1024 * 1024) {
+    alert('File too large — max 10MB.');
+    return;
+  }
+  const ok = /^image\//.test(f.type) || f.type === 'application/pdf';
+  if (!ok) {
+    alert('Only images and PDFs are accepted.');
+    return;
+  }
+  uploadedFile = f;
+  fileName.textContent = f.name;
+  fileSelected.classList.remove('hidden');
+  fileDrop.classList.add('hidden');
+  fileError.style.display = 'none';
+}
+function clearFile(e){
+  if (e) e.preventDefault();
+  uploadedFile = null;
+  proofFile.value = '';
+  fileSelected.classList.add('hidden');
+  fileDrop.classList.remove('hidden');
+}
+
+proofFile.addEventListener('change', e => {
+  if (e.target.files[0]) setFile(e.target.files[0]);
+});
+fileClear.addEventListener('click', clearFile);
+
+['dragenter','dragover'].forEach(ev => fileDrop.addEventListener(ev, e => {
+  e.preventDefault();
+  fileDrop.classList.add('dragging');
+}));
+['dragleave','drop'].forEach(ev => fileDrop.addEventListener(ev, e => {
+  e.preventDefault();
+  fileDrop.classList.remove('dragging');
+}));
+fileDrop.addEventListener('drop', e => {
+  if (e.dataTransfer.files.length) setFile(e.dataTransfer.files[0]);
+});
+
+/* =========================================================
+   Draft persistence
+   ========================================================= */
+const DRAFT_FIELDS = ['fullName','phone','email','postalAddress','lotNumber','extension','physicalLocation','purpose','bank','capacity','contactPerson','contactMobile','distance'];
+
+function saveDraft(){
+  const data = {};
+  DRAFT_FIELDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  data.location = currentLocation();
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch {}
+}
+function loadDraft(){
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    DRAFT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id]) el.value = data[id];
+    });
+    if (data.location) {
+      const r = locationRadios.find(x => x.value === data.location);
+      if (r) { r.checked = true; }
+    }
+    syncTerms();
+    updateSidebar();
+  } catch {}
+}
+
+let draftTimer;
+form.addEventListener('input', () => {
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(saveDraft, 400);
+});
+loadDraft();
+
+/* =========================================================
+   Validation
+   ========================================================= */
+function setFieldError(field, hasError){
+  const wrap = document.querySelector(`[data-field="${field}"]`);
+  if (wrap) wrap.classList.toggle('error', hasError);
+}
+
+function collectData(){
+  const basis = $$('input[name="basis"]:checked').map(x => x.value);
+  const km = currentFormDistance();
+  const outside = currentLocation() === 'outside';
+  return {
+    name: $('#fullName').value.trim(),
+    phone: $('#phone').value.trim(),
+    email: $('#email').value.trim(),
+    postalAddress: $('#postalAddress').value.trim(),
+    lotNumber: $('#lotNumber').value.trim(),
+    extension: $('#extension').value.trim(),
+    physicalLocation: $('#physicalLocation').value.trim(),
+    location: currentLocation(),
+    distance: km,
+    contactPerson: $('#contactPerson').value.trim(),
+    contactMobile: $('#contactMobile').value.trim(),
+    basis,
+    purpose: $('#purpose').value.trim(),
+    bank: $('#bank').value.trim(),
+    capacity: $('#capacity').value.trim() || 'Director',
+    signature: sigInput.value.trim(),
+    agree: $('#agree').checked,
+    deposit: outside ? DEPOSIT_OUTSIDE : DEPOSIT_GABS,
+    travelEstimate: calcTravel(km)
+  };
+}
+
+function validate(d){
+  const errors = [];
+  const required = [
+    ['name','fullName'], ['phone','phone'], ['email','email'],
+    ['postalAddress','postalAddress'], ['lotNumber','lotNumber'],
+    ['physicalLocation','physicalLocation'], ['purpose','purpose'],
+    ['signature','signature']
+  ];
+  required.forEach(([key, id]) => {
+    const el = document.getElementById(id);
+    const bad = !el.value.trim();
+    setFieldError(key, bad);
+    if (bad) errors.push(id);
+  });
+  if (!isEmail(d.email)) { setFieldError('email', true); errors.push('email'); }
+  if (d.basis.length === 0) {
+    $('#basisError').style.display = 'block';
+    errors.push('basis');
+  } else {
+    $('#basisError').style.display = 'none';
+  }
+  if (!uploadedFile) {
+    fileError.style.display = 'block';
+    errors.push('proofFile');
+  } else {
+    fileError.style.display = 'none';
+  }
+  if (!d.agree) {
+    $('#agreeError').style.display = 'block';
+    errors.push('agree');
+  } else {
+    $('#agreeError').style.display = 'none';
+  }
+  return errors;
+}
+
+/* =========================================================
+   Submit — POST multipart to /api/vas/valuation
+   ========================================================= */
+let lastServerResponse = null;
+let lastFormData = null;
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const data = collectData();
+  const errors = validate(data);
+  if (errors.length) {
+    const first = document.getElementById(errors[0]);
+    if (first) first.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="spinner"></span> Generating your signed instruction…';
+
+  try {
+    /* Build multipart body */
+    const fd = new FormData();
+    fd.append('name', data.name);
+    fd.append('phone', data.phone);
+    fd.append('email', data.email);
+    fd.append('postalAddress', data.postalAddress);
+    fd.append('lotNumber', data.lotNumber);
+    fd.append('extension', data.extension);
+    fd.append('physicalLocation', data.physicalLocation);
+    fd.append('location', data.location);
+    fd.append('distance', String(data.distance));
+    fd.append('contactPerson', data.contactPerson);
+    fd.append('contactMobile', data.contactMobile);
+    fd.append('basis', JSON.stringify(data.basis));
+    fd.append('purpose', data.purpose);
+    fd.append('bank', data.bank);
+    fd.append('capacity', data.capacity);
+    fd.append('signature', data.signature);
+    fd.append('agree', data.agree ? 'true' : 'false');
+    fd.append('deposit', String(data.deposit));
+    fd.append('travelEstimate', String(data.travelEstimate));
+    fd.append('proof_of_payment', uploadedFile);
+
+    const res = await fetch('/api/vas/valuation', { method: 'POST', body: fd });
+    const payload = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      if (res.status === 422 && Array.isArray(payload.fields)) {
+        payload.fields.forEach(f => {
+          if (f.field === 'basis') {
+            $('#basisError').textContent = f.message;
+            $('#basisError').style.display = 'block';
+          } else if (f.field === 'proof_of_payment') {
+            fileError.textContent = f.message;
+            fileError.style.display = 'block';
+          } else if (f.field === 'agree') {
+            $('#agreeError').style.display = 'block';
+          } else {
+            setFieldError(SERVER_FIELD_MAP[f.field] || f.field, true);
+          }
+        });
+        const first = document.querySelector('.form-field.error');
+        if (first) first.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+      throw new Error(payload.error || `Submission failed (${res.status})`);
+    }
+
+    lastServerResponse = payload;
+    lastFormData = data;
+
+    /* Open PDF in a new tab */
+    if (payload.pdf_url) {
+      const win = window.open(payload.pdf_url, '_blank');
+      if (win) win.opener = null;
+    }
+
+    try { localStorage.removeItem(DRAFT_KEY); } catch {}
+    showSuccess(payload, data);
+  } catch (err) {
+    console.error('[Valuation] submit error:', err);
+    alert(err.message || 'Submission failed. Please try again or email valuations@pw.co.bw.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Sign &amp; submit request <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  }
+});
+
+/* =========================================================
+   Success screen
+   ========================================================= */
+function showSuccess(payload, data){
+  const request = $('#request');
+  const success = $('#successState');
+
+  const outside = data.location === 'outside';
+  const depositLabel = outside ? 'P 2,000.00 (outside Gaborone)' : 'P 1,500.00 (within Gaborone)';
+
+  $('#sRef').textContent = payload.ref;
+  $('#sName').textContent = data.name;
+  $('#sProperty').textContent = `Lot ${data.lotNumber}${data.extension ? ' · Ext. ' + data.extension : ''} — ${data.physicalLocation}`;
+  $('#sBasis').textContent = data.basis.join(', ');
+  $('#sPurpose').textContent = data.purpose + (data.bank ? ` (${data.bank})` : '');
+  $('#sDeposit').textContent = depositLabel;
+  $('#sTravel').textContent = data.distance > 0
+    ? `${data.distance.toLocaleString()} km · ${money(data.travelEstimate)}`
+    : 'No travel';
+  $('#sSigned').textContent = `${data.signature} · ${data.capacity}`;
+
+  const dl = $('#downloadPdfBtn');
+  if (payload.pdf_url) {
+    dl.href = payload.pdf_url;
+    dl.style.display = '';
+  } else {
+    dl.style.display = 'none';
+  }
+
+  request.style.display = 'none';
+  success.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => success.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+}
+
+$('#newRequestBtn').addEventListener('click', () => {
+  const request = $('#request');
+  const success = $('#successState');
+  success.classList.add('hidden');
+  request.style.display = '';
+
+  form.reset();
+  clearFile();
+  ['name','phone','email','postalAddress','lotNumber','physicalLocation','purpose','signature'].forEach(f => setFieldError(f, false));
+  $('#basisError').style.display = 'none';
+  $('#agreeError').style.display = 'none';
+  sigPreview.textContent = '— your signature —';
+  sigPreview.classList.remove('has-name');
+
+  $$('input[name="basis"]').forEach((c, i) => c.checked = (i === 0));
+  distanceInput.value = '0';
+  lastServerResponse = null;
+  lastFormData = null;
+  syncTerms();
+  updateSidebar();
+  window.scrollTo({ top: document.getElementById('request').offsetTop - 80, behavior: 'smooth' });
+});
+
+/* =========================================================
+   Mobile menu
+   ========================================================= */
+const mobMenu = $('#mobMenu');
+const hdrHamburger = $('#hdrHamburger');
+function syncScrollLock(){
+  document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
+}
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]');
+  if (!el) return;
+  if (el.dataset.act === 'close-mob') {
+    mobMenu.classList.remove('open');
+    mobMenu.setAttribute('aria-hidden','true');
+    hdrHamburger.setAttribute('aria-expanded','false');
+    syncScrollLock();
+  }
+});
+hdrHamburger.addEventListener('click', () => {
+  mobMenu.classList.add('open');
+  mobMenu.setAttribute('aria-hidden','false');
+  hdrHamburger.setAttribute('aria-expanded','true');
+  syncScrollLock();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && mobMenu.classList.contains('open')) {
+    mobMenu.classList.remove('open');
+    syncScrollLock();
+  }
+});
+
+/* =========================================================
+   AI — fee-aware
+   ========================================================= */
+function extractValue(t){
+  const m = t.match(/(?:p|r)?\s*(\d+(?:[.,]\d+)?)\s*(m(?:illion)?|k)?\b/);
+  if (!m) return null;
+  let v = parseFloat(m[1].replace(',', '.'));
+  const unit = (m[2] || '').toLowerCase();
+  if (unit.startsWith('m')) v *= 1000000;
+  else if (unit === 'k') v *= 1000;
+  else if (v < 100) v *= 1000000;
+  return v >= 10000 ? v : null;
+}
+
+function valuationAnswer(q){
+  const t = q.toLowerCase().trim();
+  const value = extractValue(t);
+  const isAgri = /agri|farm|hectare|vineyard/.test(t);
+
+  if (value && /(fee|cost|how much|charge|pay|estimate|price)/.test(t)) {
+    const f = calcFee(value, isAgri ? 'agricultural' : 'standard');
+    const basicStr = moneyRound(f.basic);
+    const addStr = f.additional > 0 ? `plus ${moneyRound(f.additional)} additional` : 'with no additional';
+    return `For a property valued at P${value.toLocaleString()}, the REIB fee works out to about ${moneyRound(f.total)} — basic tariff ${basicStr} ${addStr}. On top of that: the P1,500 deposit (or P2,000 outside Gaborone) and travel at P5.50/km if applicable. Use the calculator above to explore other values, or scroll to the fee schedule for the full brackets.`;
+  }
+
+  if (/(fee|cost|how much|charge|deposit|travel|km|kilometre|kilometer)/.test(t)) {
+    return "Fees follow the REIB scale — a percentage of the Open Market Value. As rough guides: a P1M property costs about P2,925, a P2M about P4,425, and a P5M about P6,675. Add the P1,500 deposit (P2,000 outside Gaborone) and P5.50/km round-trip travel beyond Gaborone. Use the calculator above to estimate for your property — it's live and updates as you type.";
+  }
+
+  if (/\b(omv|fsv|rcv|basis|type of value)\b/.test(t)) {
+    return "OMV is the Open Market Value — the estimated sale price between a willing buyer and seller, both informed. FSV is the Forced Sale Value — what you'd realise under forced sale, typically 10–30% below OMV. RCV is the Replacement Cost Value — the cost to rebuild, used mainly for insurance. Per REIB 1.2.1, FSV alongside OMV doesn't count as a second valuation, so one fee applies regardless of which bases you request.";
+  }
+
+  if (/(time|long|when|fast|turnaround|days|ready)/.test(t)) {
+    return "Standard turnaround is 5–7 business days from when we receive your signed instruction and proof of payment. Complex or rural properties may take longer — we'll confirm the timeline once we've reviewed the file.";
+  }
+
+  if (/(multi|multiple|several|three|two|more than one).*(propert|valuation)/.test(t) ||
+      /(propert|valuation).*(multi|multiple|several)/.test(t)) {
+    return "Each property is valued and charged separately per the REIB scale. The deposit is charged once per instruction — not per property. So three properties in one instruction means one deposit plus three valuation fees. Let us know in the notes field or email and we'll prepare a consolidated instruction.";
+  }
+
+  if (/(revalu|re-val|renewal|update)/.test(t)) {
+    return "Per REIB 1.5, a revaluation of the same property by the same valuer within 12 months — where the property hasn't changed materially — is charged at 50% of the first valuation fee. Beyond 12 months, standard rates apply.";
+  }
+
+  if (/\b(document|paperwork|require|need|provide|bring)\b/.test(t)) {
+    return "You'll need: your ID or company registration, the Lot number and Extension (we do the deeds search), proof of the deposit payment, and any existing plans or approvals. Access contact details for the property help us schedule the site visit.";
+  }
+
+  if (/(gaborone|outside|location|where|travel|distance|km)/.test(t)) {
+    return "Deposit is P1,500 within Gaborone, P2,000 for any property outside. Travel is P5.50 per kilometre round-trip beyond Gaborone — enter the round-trip distance on the form and the sidebar updates with the travel estimate. For a property 50km away (100km round-trip), travel would be P550.";
+  }
+
+  if (/(bank|mortgage|loan|insurance|sale|estate|divorce|litigation|court|purpose)/.test(t)) {
+    return "Valuations cover mortgage finance, insurance reinstatement, sale, estate planning, divorce settlements, litigation and financial reporting. Tell me the purpose and — if relevant — the bank, and I can guide you on the right basis.";
+  }
+
+  if (/(sign|signature|electronic|legal|binding)/.test(t)) {
+    return "Your typed name is a valid electronic signature for the instruction. Combined with accepting the terms and the auto-timestamp on the PDF, this is legally binding. The signed PDF is generated on submit — save a copy for your records and forward it to your bank if needed.";
+  }
+
+  if (/(start|begin|apply|fill|request|proceed|form)/.test(t) && /\b(valuation|form|apply|request)\b/.test(t)) {
+    setTimeout(() => {
+      const el = document.getElementById('request');
+      if (el) window.scrollTo({ top: el.offsetTop - 80, behavior:'smooth' });
+    }, 300);
+    return "Scrolling you to the form — it takes about 4 minutes. Your signed instruction PDF is generated on submit. Let me know if you need help with any field.";
+  }
+
+  return "I can help with fees, the REIB scale, OMV/FSV/RCV basis, travel costs, or getting you started with the form. Try asking 'how much for a P3M property?' or 'what does travel to Maun cost?' — or just say 'start the form' and I'll scroll you down.";
+}
+
+PropertyAI.configure({
+  storageKey: 'pw-ai-history',
+  page: 'valuation',
+  subtitle: 'Valuation Services',
+  greeting: "Hi — I'm the Property World valuation advisor. I can quote fees for any property value, explain the OMV/FSV/RCV basis, clarify travel costs, or help you start the form. What would you like to know?",
+  quickPrompts: [
+    'Fee for a P3M property?',
+    "What's the turnaround?",
+    'Travel outside Gaborone?',
+    'Start the form'
+  ],
+  onReply: (q) => valuationAnswer(q)
+});
+</script>
+
+</body>
+</html>

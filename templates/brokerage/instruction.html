@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Propertyworld — Client Instruction</title>
+<style>
+  @page { size: A4; margin: 15mm 15mm 16mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 9pt; line-height: 1.5; color: #1a1a1a; }
+
+  .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 10px; border-bottom: 1.5px solid #2D2450; margin-bottom: 16px; }
+  .logo { font-family: 'Georgia', 'Times New Roman', serif; font-size: 15pt; font-weight: 700; letter-spacing: -.2px; }
+  .logo span { color: #4A3D7A; }
+  .tagline { font-size: 6.5pt; letter-spacing: 1.6px; color: #888; margin-top: 2px; text-transform: uppercase; }
+  .office { font-size: 7pt; line-height: 1.6; color: #555; text-align: right; }
+  .office strong { color: #2D2450; font-weight: 600; }
+
+  h1 { font-family: 'Georgia', 'Times New Roman', serif; font-size: 12pt; text-align: center; letter-spacing: 1.2px; margin: 8px 0 16px; color: #2D2450; }
+
+  .intro { font-size: 10pt; margin-bottom: 14px; line-height: 1.55; }
+  .signed-name { border-bottom: 1px solid #4A3D7A; font-weight: 600; padding: 0 4px 1px; color: #2D2450; }
+
+  h2 { font-family: 'Georgia', 'Times New Roman', serif; font-size: 9.5pt; letter-spacing: .8px; text-transform: uppercase; color: #4A3D7A; border-bottom: 1px solid #d5d0e0; padding-bottom: 3px; margin: 14px 0 8px; }
+
+  .row { margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px 20px; }
+  .field { display: inline-flex; align-items: baseline; gap: 3px; min-width: 0; }
+  .field.wide { flex: 1; }
+  .label { color: #555; font-size: 8.5pt; white-space: nowrap; }
+  .value { font-weight: 500; color: #000; min-width: 55px; border-bottom: 1px dotted #c8c8c8; padding: 0 3px 1px; }
+
+  .commission { background: #F1EDFA; border-left: 3px solid #4A3D7A; padding: 10px 14px; margin: 14px 0 10px; font-size: 8.5pt; line-height: 1.6; }
+  .commission p { margin: 3px 0; }
+  .sole-clause { background: #f5f2fa; border: 1px solid #d5d0e0; padding: 10px 14px; margin: 10px 0; font-size: 9pt; line-height: 1.55; }
+
+  .sig-block { margin-top: 22px; }
+  .sig-row { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 12px; }
+  .sig-label { font-size: 8pt; color: #666; margin-bottom: 3px; }
+  .sig-line { border-bottom: 1px solid #333; padding: 4px 6px; font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 15pt; min-height: 34px; color: #111; }
+  .sig-name { font-size: 7.5pt; color: #777; margin-top: 3px; }
+
+  .footer { margin-top: 22px; padding-top: 10px; border-top: 1px solid #d5d0e0; display: flex; justify-content: space-between; gap: 24px; font-size: 7.5pt; color: #666; }
+  .footer-field { flex: 1; }
+  .footer-field .label { font-size: 7.5pt; display: block; margin-bottom: 2px; }
+  .footer-field .value { min-width: 100%; display: block; }
+
+  .final-note { text-align: center; font-family: Georgia, serif; font-style: italic; font-size: 8pt; color: #888; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo">Property<span>World</span></div>
+    <div class="tagline">Creating Lasting Partnerships</div>
+  </div>
+  <div class="office">
+    {{#if isCommercial}}
+      <strong>GABORONE</strong> · Plot 54368, i-Tower, Floor 5A<br>
+      P O Box 45653, Gaborone<br>
+      Tel: (267) 3972039<br>
+      Fax: (267) 3973403
+    {{else}}
+      <strong>HEAD OFFICE</strong> · Unit 5A, iTowers, CBD, Plot 54368, Gaborone<br>
+      P O Box 45653, Gaborone<br>
+      Tel: (267) 3972039 · Fax: (267) 3973403<br>
+      Web: www.pw.co.bw
+    {{/if}}
+  </div>
+</div>
+
+<h1>
+  {{#if isSole}}CLIENTS INSTRUCTION: SOLE MANDATE{{else}}CLIENTS INSTRUCTION: MULTIPLE AGENCY{{/if}}
+</h1>
+
+<p class="intro">
+  I <span class="signed-name">{{owner.title}} {{owner.name}}</span> wish to instruct Propertyworld (Pty) Ltd to
+  <strong>{{txnWord}}</strong> the property listed below on my/Our behalf.
+</p>
+
+<h2>Property Details</h2>
+
+<div class="row">
+  <div class="field"><span class="label">Plot no.</span><span class="value">{{property.plotNo}}</span></div>
+  <div class="field"><span class="label">Ext/Location.</span><span class="value">{{property.extLocation}}</span></div>
+</div>
+<div class="row">
+  <div class="field"><span class="label">Ownership:</span><span class="value">{{owner.ownership}}</span></div>
+  <div class="field"><span class="label">Contact person:</span><span class="value">{{contact.title}} {{contact.name}}</span></div>
+</div>
+<div class="row">
+  <div class="field"><span class="label">Tel (w)</span><span class="value">{{contact.telWork}}</span></div>
+  <div class="field"><span class="label">Tel (h)</span><span class="value">{{contact.telHome}}</span></div>
+  <div class="field"><span class="label">Fax.</span><span class="value">{{contact.fax}}</span></div>
+  <div class="field"><span class="label">Cell.</span><span class="value">{{contact.cell}}</span></div>
+</div>
+<div class="row"><div class="field wide"><span class="label">Postal Address.</span><span class="value">{{contact.postalAddress}}</span></div></div>
+<div class="row"><div class="field wide"><span class="label">Email.</span><span class="value">{{contact.email}}</span></div></div>
+<div class="row"><div class="field wide"><span class="label">Keys &amp; access.</span><span class="value">{{owner.keysAccess}}</span></div></div>
+
+{{#if isCommercial}}
+
+  <h2>Offices</h2>
+  <div class="row">
+    <div class="field"><span class="label">Size</span><span class="value">{{offices.size}}</span><span class="label">sqm</span></div>
+    <div class="field"><span class="label">Plot size</span><span class="value">{{offices.plotSize}}</span><span class="label">sqm</span></div>
+    <div class="field"><span class="label">No. of toilets</span><span class="value">{{offices.toilets}}</span></div>
+    <div class="field"><span class="label">No. of kitchens</span><span class="value">{{offices.kitchens}}</span></div>
+  </div>
+  <div class="row">
+    <div class="field"><span class="label">Air-conditioned.</span><span class="value">{{offices.airCon}}</span></div>
+    <div class="field"><span class="label">Carpeting.</span><span class="value">{{offices.carpet}}</span></div>
+    <div class="field"><span class="label">Ceramic tiles.</span><span class="value">{{offices.ceramic}}</span></div>
+  </div>
+
+  <h2>Warehouses</h2>
+  <div class="row">
+    <div class="field"><span class="label">Size</span><span class="value">{{warehouses.size}}</span><span class="label">sqm</span></div>
+    <div class="field"><span class="label">Plot size</span><span class="value">{{warehouses.plotSize}}</span><span class="label">sqm</span></div>
+    <div class="field"><span class="label">No. of loading doors</span><span class="value">{{warehouses.loadingDoors}}</span></div>
+    <div class="field"><span class="label">No. of offices</span><span class="value">{{warehouses.offices}}</span></div>
+    <div class="field"><span class="label">No. of toilets</span><span class="value">{{warehouses.toilets}}</span></div>
+  </div>
+  <div class="row"><div class="field"><span class="label">Kitchen.</span><span class="value">{{warehouses.kitchen}}</span></div></div>
+
+  <div class="row">
+    <div class="field"><span class="label">Amount Required P.</span><span class="value">{{pricing.amountRequired}}</span></div>
+    <div class="field"><span class="label">Rate/sqm P.</span><span class="value">{{pricing.ratePerSqm}}</span></div>
+    <div class="field"><span class="label">Other charges / levy</span><span class="value">{{pricing.otherCharges}}</span></div>
+  </div>
+  <div class="row"><div class="field wide"><span class="label">When available.</span><span class="value">{{property.availableDate}}</span></div></div>
+  <div class="row"><div class="field wide"><span class="label">Other details.</span><span class="value">{{property.otherDetails}}</span></div></div>
+
+{{else}}
+
+  <div class="row">
+    <div class="field"><span class="label">Amount required P.</span><span class="value">{{pricing.amountRequired}}</span></div>
+    <div class="field"><span class="label">When available.</span><span class="value">{{property.availableDate}}</span></div>
+  </div>
+
+  <h2>Property Features</h2>
+
+  <div class="row">
+    <div class="field"><span class="label">Bedrooms no.</span><span class="value">{{features.bedrooms}}</span></div>
+    <div class="field"><span class="label">Bathrooms no.</span><span class="value">{{features.bathrooms}}</span></div>
+    <div class="field"><span class="label">Showers no.</span><span class="value">{{features.showers}}</span></div>
+    <div class="field"><span class="label">Garage no.</span><span class="value">{{features.garage}}</span></div>
+    <div class="field"><span class="label">Carport no.</span><span class="value">{{features.carport}}</span></div>
+    <div class="field"><span class="label">Air cons no.</span><span class="value">{{features.aircons}}</span></div>
+  </div>
+
+  <div class="row">
+    <div class="field"><span class="label">Scullery.</span><span class="value">{{features.scullery}}</span></div>
+    <div class="field"><span class="label">Master Ensuite.</span><span class="value">{{features.masterEnsuite}}</span></div>
+    <div class="field"><span class="label">Pantry.</span><span class="value">{{features.pantry}}</span></div>
+    <div class="field"><span class="label">Guest toilet.</span><span class="value">{{features.guestToilet}}</span></div>
+  </div>
+  <div class="row">
+    <div class="field"><span class="label">S/quarters 1/2 bed.</span><span class="value">{{features.staffQuarters}}</span></div>
+    <div class="field"><span class="label">Lounge.</span><span class="value">{{features.lounge}}</span></div>
+    <div class="field"><span class="label">Dining.</span><span class="value">{{features.dining}}</span></div>
+    <div class="field"><span class="label">Family room.</span><span class="value">{{features.familyRoom}}</span></div>
+  </div>
+  <div class="row">
+    <div class="field"><span class="label">Study.</span><span class="value">{{features.study}}</span></div>
+    <div class="field"><span class="label">Guest wing.</span><span class="value">{{features.guestWing}}</span></div>
+    <div class="field"><span class="label">Fitted kitchen.</span><span class="value">{{features.fittedKitchen}}</span></div>
+    <div class="field"><span class="label">S/pool.</span><span class="value">{{features.pool}}</span></div>
+  </div>
+  <div class="row">
+    <div class="field"><span class="label">Established gardens.</span><span class="value">{{features.gardens}}</span></div>
+    <div class="field"><span class="label">Security system.</span><span class="value">{{features.securitySystem}}</span></div>
+    <div class="field"><span class="label">Electric fence.</span><span class="value">{{features.electricFence}}</span></div>
+    <div class="field"><span class="label">Automated gate.</span><span class="value">{{features.automatedGate}}</span></div>
+  </div>
+
+  <div class="row"><div class="field wide"><span class="label">Plot size.</span><span class="value">{{property.plotSize}}</span><span class="label">sqm</span></div></div>
+  <div class="row"><div class="field wide"><span class="label">Other details.</span><span class="value">{{property.otherDetails}}</span></div></div>
+
+{{/if}}
+
+<h2>Commission</h2>
+
+<div class="commission">
+  {{#if isCommercial}}
+    <p><strong>Selling:</strong> If we secure a suitable buyer and finalize the deal our commission would be <strong>5%</strong> of the sale price, based on the Real Estate Institute of Botswana fee scale.</p>
+    <p><strong>Leasing:</strong> If we secure a suitable tenant our fees would be <strong>1 month's rental</strong>, deducted from the first rental payment.</p>
+  {{else}}
+    <p><strong>Selling:</strong> If we secure a suitable buyer and finalize the deal our commission would be <strong>6%</strong> of the sale price, based on the Real Estate Institute of Botswana fee scale.</p>
+    <p><strong>Leasing:</strong> If we secure a suitable tenant our fees would be <strong>1 month's rental</strong>.</p>
+  {{/if}}
+</div>
+
+{{#if isSole}}
+<div class="sole-clause">
+  <strong>The Sole Mandate</strong> shall be for a period of <strong>{{mandateMonths}} months</strong> after which the mandate shall become multiple Agency.
+</div>
+{{/if}}
+
+<div class="sig-block">
+  <p><strong>Please sign below.</strong></p>
+  <div class="sig-row">
+    <div>
+      <div class="sig-label">Seller / Landlord</div>
+      <div class="sig-line">{{signature}}</div>
+      <div class="sig-name">{{owner.title}} {{owner.name}}</div>
+    </div>
+    <div>
+      <div class="sig-label">Date</div>
+      <div style="border-bottom:1px solid #333;padding:6px 4px;font-size:10pt">{{date}}</div>
+    </div>
+  </div>
+</div>
+
+{{#if isMultiple}}
+<div class="footer">
+  <div class="footer-field"><span class="label">INTRODUCER:</span><span class="value">&nbsp;</span></div>
+  <div class="footer-field"><span class="label">FOR PROPERTYWORLD:</span><span class="value">&nbsp;</span></div>
+</div>
+{{/if}}
+
+<div class="final-note">Propertyworld (Pty) Ltd · Creating Lasting Partnerships</div>
+
+</body>
+</html>

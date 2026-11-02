@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Consultancy | Property World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple-deep:#2D2450;
+  --purple:#4A3D7A;
+  --purple-mid:#7B6BA8;
+  --purple-soft:#F1EDFA;
+  --purple-line:#D9D2EB;
+
+  --blue:var(--purple-deep);
+  --blue-h:var(--purple);
+  --blue-soft:var(--purple-soft);
+
+  --amber:#EDB458; --amber-soft:#fdf4e4; --amber-ink:#8a5a12;
+  --ink:#151515; --g600:#717171; --g400:#adadad; --g200:#e0e0e0; --g100:#f5f5f5;
+  --serif:'Playfair Display', Georgia, serif;
+  --sans:'Inter', -apple-system, sans-serif;
+  --page-pad:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{overflow-x:hidden}
+body{font-family:var(--sans);color:var(--ink);background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;max-width:100vw}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+.hidden{display:none !important}
+::selection{background:var(--purple-soft);color:var(--purple-deep)}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #eaeaea}
+.hdr-top{display:flex;align-items:center;height:72px;padding:0 var(--page-pad);gap:22px;max-width:100%}
+.hdr-logo{display:flex;align-items:center;flex-shrink:0}
+.hdr-logo img{height:52px;width:auto;display:block}
+.hdr-spacer{flex:1}
+.hdr-links{display:flex;gap:clamp(10px, 1.15vw, 20px);font-size:clamp(12px, 0.9vw, 13.5px);color:var(--ink);white-space:nowrap}
+.hdr-links a{transition:color .15s}
+.hdr-links a:hover{color:var(--purple-deep)}
+.hdr-links a.active{color:var(--purple-deep);font-weight:600}
+.hdr-hamburger{display:none;width:40px;height:40px;border-radius:50%;align-items:center;justify-content:center;color:var(--ink);transition:background .15s;flex-shrink:0}
+.hdr-hamburger:hover{background:var(--g100)}
+.hdr-hamburger svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.hdr-cta{font-size:14px;color:var(--purple-deep);border:1px solid var(--purple-deep);border-radius:100px;padding:8px 18px;font-weight:500;background:#fff;transition:.15s;white-space:nowrap}
+.hdr-cta:hover{background:var(--purple-deep);color:#fff}
+.hdr-sub{display:flex;align-items:center;gap:20px;height:56px;padding:0 var(--page-pad);border-top:1px solid #f0f0f0;overflow-x:auto;max-width:100%}
+.hdr-sub::-webkit-scrollbar{display:none}
+.hdr-back{display:flex;align-items:center;gap:8px;font-size:14px;white-space:nowrap}
+.hdr-back:hover{color:var(--purple-deep)}
+.hdr-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.hdr-crumbs{display:flex;gap:6px;font-size:13px;color:var(--g600);white-space:nowrap}
+.hdr-crumbs::before{content:'';width:1px;height:18px;background:var(--g200);margin-right:16px;align-self:center}
+.hdr-crumbs a{color:var(--g600)}
+.hdr-crumbs a:hover{color:var(--purple-deep)}
+@media(max-width:1200px){
+  .hdr-hamburger{display:flex}
+  .hdr-links{display:none}
+  .hdr-cta{display:none}
+  .hdr-top{padding:0 20px;gap:14px;height:64px}
+  .hdr-logo img{height:46px}
+  .hdr-sub{padding:0 20px}
+  :root{--page-pad:24px}
+}
+@media(max-width:700px){
+  .hdr-top,.hdr-sub{padding:0 16px}
+  .hdr-sub{height:50px}
+  .hdr-logo img{height:42px}
+  :root{--page-pad:16px}
+}
+
+/* MOBILE MENU */
+.mob-menu{position:fixed;inset:0;z-index:500;display:none}
+.mob-menu.open{display:block}
+.mob-menu-overlay{position:absolute;inset:0;background:rgba(10,14,20,.5);animation:fadeIn .2s ease}
+.mob-menu-drawer{position:absolute;top:0;left:0;bottom:0;width:320px;max-width:86vw;background:#fff;overflow-y:auto;padding:20px 24px 32px;display:flex;flex-direction:column;animation:slideIn .25s ease;box-shadow:8px 0 40px rgba(0,0,0,.15)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+.mob-menu-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.mob-menu-logo img{height:48px;width:auto;display:block}
+.mob-menu-close{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--g600);line-height:1}
+.mob-menu-close:hover{background:var(--g100)}
+.mob-menu-nav{display:flex;flex-direction:column;border-top:1px solid var(--g200)}
+.mob-menu-nav a{padding:16px 0;font-size:16px;font-weight:500;border-bottom:1px solid var(--g200);transition:color .15s}
+.mob-menu-nav a:hover{color:var(--purple-deep)}
+.mob-menu-nav a.active{color:var(--purple-deep);font-weight:600}
+.mob-menu-actions{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.mob-menu-actions .hdr-cta{display:block;text-align:center;padding:12px 18px;background:var(--purple-deep);color:#fff;border:0}
+
+/* HERO */
+.hero-parallax{position:relative;min-height:520px;height:70vh;display:flex;align-items:center;color:#fff;background-image:linear-gradient(180deg, rgba(45,36,80,.55) 0%, rgba(45,36,80,.72) 60%, rgba(45,36,80,.85) 100%),url('https://img.jamesedition.com/listing_images/2026/07/11/02/01/22/907011b8-4b88-4b8e-95d6-1c627e94a2f7/je/2000xxs.jpg');background-size:cover;background-position:center;background-attachment:fixed;overflow:hidden}
+@media(max-width:900px){.hero-parallax{background-attachment:scroll;height:auto;min-height:0;padding:80px 0 60px}}
+.hero-inner{max-width:1360px;margin:0 auto;padding:0 var(--page-pad);width:100%;position:relative;z-index:2}
+.hero-parallax h1{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.6vw,58px);line-height:1.08;letter-spacing:-.5px;max-width:18ch;margin-bottom:22px}
+.hero-parallax .lede{font-size:clamp(15px,1.3vw,17px);line-height:1.65;max-width:56ch;color:rgba(255,255,255,.86);margin-bottom:32px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary-lg{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);padding:15px 28px;border-radius:100px;font-size:15px;font-weight:600;transition:.18s}
+.btn-primary-lg:hover{background:var(--amber);color:#151515;transform:translateY(-1px);box-shadow:0 12px 30px rgba(237,180,88,.35)}
+.btn-primary-lg svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;transition:transform .18s}
+.btn-primary-lg:hover svg{transform:translateX(3px)}
+.btn-ghost-lg{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);color:#fff;padding:15px 26px;border-radius:100px;font-size:15px;font-weight:500;transition:.18s;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px)}
+.btn-ghost-lg:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.4)}
+
+/* SHARED SECTION */
+.section-inner{max-width:1360px;margin:0 auto;padding:0 var(--page-pad)}
+.section-eyebrow{display:inline-block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--purple-deep);margin-bottom:14px}
+.section-header{max-width:720px;margin-bottom:44px}
+.section-header h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,42px);line-height:1.15;letter-spacing:-.3px;margin-bottom:14px}
+.section-header p{font-size:16px;color:var(--g600);line-height:1.65}
+
+/* SERVICES */
+.services-section{padding:88px 0 72px;background:#fff}
+@media(max-width:900px){.services-section{padding:56px 0 48px}}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.services-grid{grid-template-columns:1fr;gap:16px}}
+.service-card{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:32px 28px;transition:.2s;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.service-card:hover{border-color:#cfd6e0;box-shadow:0 20px 50px rgba(45,36,80,.08);transform:translateY(-2px)}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple-deep),var(--purple-mid));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{width:52px;height:52px;border-radius:12px;background:var(--purple-soft);color:var(--purple-deep);display:flex;align-items:center;justify-content:center;transition:.2s}
+.service-icon svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.service-card:hover .service-icon{background:var(--purple-deep);color:#fff}
+.service-card h3{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.25;color:var(--ink)}
+.service-card p{font-size:14px;color:var(--g600);line-height:1.6}
+.service-list{list-style:none;margin-top:4px;display:flex;flex-direction:column;gap:8px}
+.service-list li{font-size:13.5px;color:var(--ink);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.service-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:8px}
+
+/* APPROACH */
+.approach-section{padding:80px 0;background:#fbfcfd;border-top:1px solid #eef0f3;border-bottom:1px solid #eef0f3}
+@media(max-width:900px){.approach-section{padding:56px 0}}
+.approach-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start}
+@media(max-width:900px){.approach-layout{grid-template-columns:1fr;gap:36px}}
+.approach-copy h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.2vw,38px);line-height:1.15;letter-spacing:-.3px;margin-bottom:18px;max-width:18ch}
+.approach-copy p{font-size:16px;color:var(--g600);line-height:1.75;margin-bottom:16px}
+.approach-copy p:last-of-type{margin-bottom:0}
+.approach-pillars{display:flex;flex-direction:column;gap:14px}
+.pillar{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;background:#fff;border:1px solid var(--g200);border-radius:12px;transition:.18s}
+.pillar:hover{border-color:#cfd6e0;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.pillar-icon{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:var(--amber-soft);color:var(--amber-ink);display:flex;align-items:center;justify-content:center}
+.pillar-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.pillar-body h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.3}
+.pillar-body p{font-size:13px;color:var(--g600);line-height:1.55}
+
+/* ENQUIRY */
+.enquiry-section{padding:88px 0 100px;background:#fff;border-top:1px solid #eef0f3}
+@media(max-width:900px){.enquiry-section{padding:56px 0 72px}}
+.enquiry-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:start;max-width:1200px}
+@media(max-width:1000px){.enquiry-layout{grid-template-columns:1fr;gap:28px}}
+.enquiry-form{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.02)}
+.enquiry-head{padding:32px 40px 22px}
+@media(max-width:700px){.enquiry-head{padding:26px 22px 18px}}
+.enquiry-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,32px);line-height:1.15;letter-spacing:-.3px;margin-bottom:10px}
+.enquiry-head p{font-size:14.5px;color:var(--g600);line-height:1.6;max-width:56ch}
+.enquiry-body{padding:0 40px 8px;border-top:1px solid #eef0f3;padding-top:24px;margin-top:0}
+@media(max-width:700px){.enquiry-body{padding:22px 22px 8px}}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field.full{grid-column:1/-1}
+.form-field label{font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--g600);text-transform:uppercase}
+.form-field label .req{color:#c0392b;font-weight:700;margin-left:2px}
+.form-field label .hint{font-weight:400;text-transform:none;letter-spacing:0;color:var(--g400);font-size:11.5px;margin-left:4px}
+.form-field input[type=text],
+.form-field input[type=email],
+.form-field input[type=tel],
+.form-field textarea,
+.form-field select{width:100%;border:1.5px solid var(--g200);border-radius:8px;padding:12px 14px;font-family:inherit;font-size:14.5px;background:#fff;transition:border-color .15s,box-shadow .15s;color:var(--ink)}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{outline:none;border-color:var(--purple-deep);box-shadow:0 0 0 3px rgba(74,61,122,.08)}
+.form-field textarea{min-height:110px;resize:vertical;line-height:1.55}
+.form-field.error input,.form-field.error textarea,.form-field.error select{border-color:#d9534f;background:#fef7f7}
+.form-field .err-msg{font-size:12px;color:#c0392b;margin-top:2px;display:none}
+.form-field.error .err-msg{display:block}
+
+.interest-pills{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:600px){.interest-pills{grid-template-columns:1fr 1fr}}
+.interest-pill{position:relative;cursor:pointer}
+.interest-pill input{position:absolute;opacity:0;pointer-events:none}
+.interest-pill span{display:block;padding:11px 14px;border-radius:8px;border:1.5px solid var(--g200);background:#fff;text-align:center;font-size:13px;font-weight:500;color:var(--g600);transition:.15s;line-height:1.3}
+.interest-pill:hover span{border-color:#c8ccd2;color:var(--ink)}
+.interest-pill input:checked ~ span{border-color:var(--purple-deep);background:var(--purple-soft);color:var(--purple-deep);font-weight:600}
+
+.enquiry-submit{padding:22px 40px 34px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid #eef0f3}
+@media(max-width:700px){.enquiry-submit{padding:20px 22px 28px}}
+.enquiry-note{font-size:12.5px;color:var(--g600);line-height:1.55;flex:1;min-width:200px}
+.submit-btn{display:inline-flex;align-items:center;gap:10px;background:var(--purple-deep);color:#fff;padding:15px 28px;border-radius:100px;font-size:15px;font-weight:600;transition:.18s;min-width:200px;justify-content:center}
+.submit-btn:hover:not(:disabled){background:var(--purple);transform:translateY(-1px);box-shadow:0 12px 28px rgba(45,36,80,.3)}
+.submit-btn:disabled{opacity:.7;cursor:wait}
+.submit-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.submit-btn .spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.enquiry-side{display:flex;flex-direction:column;gap:16px}
+.next-card{background:linear-gradient(180deg,#2D2450 0%,#4A3D7A 100%);color:#fff;border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(45,36,80,.25)}
+.next-card::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(237,180,88,.2),transparent 70%);pointer-events:none}
+.next-card h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:16px}
+.next-step{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.next-step:last-child{border-bottom:0;padding-bottom:0}
+.next-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(237,180,88,.15);color:var(--amber);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:13px;font-weight:600}
+.next-step-body strong{display:block;font-size:13.5px;color:#fff;font-weight:600;margin-bottom:3px;line-height:1.3}
+.next-step-body span{display:block;font-size:12.5px;color:rgba(255,255,255,.65);line-height:1.5}
+
+.contact-card{background:#fff;border:1px solid var(--g200);border-radius:12px;padding:22px}
+.contact-card h4{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.contact-card h4 svg{width:16px;height:16px;stroke:var(--purple-deep);fill:none;stroke-width:2}
+.contact-card p{font-size:13px;color:var(--g600);line-height:1.6;margin-bottom:14px}
+.contact-card .line{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:13.5px;color:var(--ink);border-top:1px solid #f0f0f0}
+.contact-card .line:first-of-type{border-top:0;padding-top:0}
+.contact-card .line svg{width:15px;height:15px;stroke:var(--purple-deep);fill:none;stroke-width:2;flex-shrink:0}
+.contact-card .line a{color:var(--ink);transition:color .15s}
+.contact-card .line a:hover{color:var(--purple-deep)}
+
+/* SUCCESS */
+.success-section{padding:80px 0 100px;background:#fbfcfd;border-top:1px solid #eef0f3}
+.success-inner{max-width:760px;margin:0 auto;padding:0 var(--page-pad);text-align:center}
+.success-icon-lg{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#e8f5ec,#d4efdd);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;color:#1f7a3a;font-size:42px;font-weight:300;box-shadow:0 12px 32px rgba(31,122,58,.15);animation:pop .5s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.success-inner h1{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.6vw,40px);line-height:1.15;letter-spacing:-.3px;margin-bottom:14px}
+.success-inner .lede{font-size:16px;color:var(--g600);line-height:1.65;max-width:58ch;margin:0 auto 34px}
+.success-card{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:32px 34px;text-align:left;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.02)}
+.success-card h3{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--g600);margin-bottom:16px}
+.ref-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid #eef0f3;flex-wrap:wrap}
+.ref-row:last-child{border-bottom:0}
+.ref-row .label{font-size:13px;color:var(--g600)}
+.ref-row .value{font-size:14px;color:var(--ink);font-weight:600;text-align:right;word-break:break-word}
+.ref-row .value.mono{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:13.5px;letter-spacing:.02em}
+.success-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.success-actions button{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:100px;font-size:14.5px;font-weight:600;transition:.15s;background:var(--purple-deep);color:#fff}
+.success-actions button:hover{background:var(--purple);transform:translateY(-1px);box-shadow:0 12px 28px rgba(45,36,80,.3)}
+.success-actions svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* QUOTE */
+.quote-parallax{position:relative;min-height:400px;display:flex;align-items:center;justify-content:center;background-image:linear-gradient(180deg, rgba(45,36,80,.6), rgba(45,36,80,.78)),url('https://img.jamesedition.com/listing_images/2026/05/13/16/40/35/c63a9de3-63dc-44f4-bdf2-17fcfb60e144/je/2000xxs.jpg');background-size:cover;background-position:center;background-attachment:fixed;color:#fff;padding:80px var(--page-pad);text-align:center}
+@media(max-width:900px){.quote-parallax{background-attachment:scroll;min-height:320px;padding:60px 24px}}
+.quote-inner{max-width:820px}
+.quote-inner blockquote{font-family:var(--serif);font-weight:400;font-style:italic;font-size:clamp(22px,3vw,34px);line-height:1.35;letter-spacing:-.2px;margin-bottom:22px}
+.quote-inner blockquote::before,.quote-inner blockquote::after{color:var(--amber);font-size:1.1em}
+.quote-inner cite{font-style:normal;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:500}
+
+/* FAQ */
+.faq-section{padding:90px 0 100px;background:#fff}
+@media(max-width:700px){.faq-section{padding:60px 0 70px}}
+.faq-inner{max-width:820px;margin:0 auto;padding:0 var(--page-pad)}
+.faq-header{text-align:center;margin-bottom:44px}
+.faq-header h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,38px);line-height:1.15;letter-spacing:-.3px;margin-bottom:14px}
+.faq-header p{font-size:15px;color:var(--g600)}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{border:1px solid var(--g200);border-radius:12px;background:#fff;transition:.18s;overflow:hidden}
+.faq-item[open]{border-color:#cfd6e0;box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:15px;font-weight:600;color:var(--ink);transition:.15s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{background:#fbfcfd}
+.faq-item summary::after{content:'+';font-family:var(--serif);font-size:22px;font-weight:400;color:var(--g600);transition:transform .2s;flex-shrink:0;width:24px;text-align:center;line-height:1}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item p{padding:0 24px 22px;font-size:14px;line-height:1.7;color:var(--g600)}
+.faq-item p strong{color:var(--ink);font-weight:600}
+@media(max-width:700px){.faq-item summary{padding:16px 18px;font-size:14px}.faq-item p{padding:0 18px 18px;font-size:13.5px}}
+
+/* FOOTER */
+.footer{background:#f8f9fb;border-top:1px solid #eaeaea;padding:56px 0 24px;width:100%}
+.footer-top{max-width:1360px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.2fr 2fr;gap:60px;align-items:start}
+.footer-logo img{height:56px;width:auto;display:block}
+.footer-tagline{color:var(--g600);font-size:14px;margin-top:14px;max-width:300px;line-height:1.65}
+.footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.footer-col h4{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--g600);margin-bottom:14px}
+.footer-col a{display:block;font-size:14px;color:var(--ink);padding:6px 0;transition:color .15s}
+.footer-col a:hover{color:var(--purple-deep)}
+.footer-bottom{max-width:1360px;margin:44px auto 0;padding:24px 48px 0;border-top:1px solid #ececec;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--g600);flex-wrap:wrap;gap:12px}
+.footer-bottom .credit{color:var(--g400)}
+.footer-bottom .credit strong{color:var(--g600);font-weight:500}
+@media(max-width:900px){.footer-top{padding:0 24px;grid-template-columns:1fr;gap:36px}.footer-cols{grid-template-columns:repeat(2,1fr)}.footer-bottom{padding:24px 24px 0;flex-direction:column;text-align:center}}
+@media(max-width:500px){.footer-cols{grid-template-columns:1fr}}
+@media(max-width:1100px){ .pw-ai-fab{bottom:22px !important} }
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-top">
+    <button class="hdr-hamburger" id="hdrHamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobMenu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <a class="hdr-logo" href="/" aria-label="Property World Home">
+      <img src="logo.png" alt="Property World">
+    </a>
+    <div class="hdr-spacer"></div>
+    <nav class="hdr-links">
+      <a href="/brokerage">Brokerage</a>
+      <a href="/valuation">Valuation</a>
+      <a href="/property-management">Management</a>
+      <a href="/investment-consultancy" class="active">Investment</a>
+      <a href="/project-management">Projects</a>
+      <a href="/architecture">Architecture</a>
+      <a href="/listings">Listings</a>
+    </nav>
+    <a class="hdr-cta" href="#enquiry">Book a consultation</a>
+  </div>
+  <div class="hdr-sub">
+    <a class="hdr-back" href="/">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to home
+    </a>
+    <div class="hdr-crumbs">
+      <a href="/investment-consultancy">Services</a> / <span>Investment Consultancy</span>
+    </div>
+  </div>
+</header>
+
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <div class="mob-menu-overlay" data-act="close-mob"></div>
+  <div class="mob-menu-drawer" role="dialog" aria-label="Main menu">
+    <div class="mob-menu-head">
+      <div class="mob-menu-logo"><img src="logo.png" alt="Property World"></div>
+      <button class="mob-menu-close" data-act="close-mob" aria-label="Close menu">×</button>
+    </div>
+    <nav class="mob-menu-nav">
+      <a href="/brokerage">Brokerage</a>
+      <a href="/valuation">Valuation</a>
+      <a href="/property-management">Management</a>
+      <a href="/investment-consultancy" class="active">Investment</a>
+      <a href="/project-management">Projects</a>
+      <a href="/architecture">Architecture</a>
+      <a href="/listings">Listings</a>
+    </nav>
+    <div class="mob-menu-actions">
+      <a class="hdr-cta" href="#enquiry" data-act="close-mob">Book a consultation</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero-parallax">
+  <div class="hero-inner">
+    <h1>Independent investment opinions you can act on.</h1>
+    <p class="lede">A professional view you can take to the board, the bank, or your investment committee — grounded in the REIB methodology and independent of any developer or lender.</p>
+    <div class="hero-actions">
+      <a href="#enquiry" class="btn-primary-lg">
+        Book a consultation
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#services" class="btn-ghost-lg">What we advise on</a>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="services">
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-eyebrow">What we advise on</div>
+      <h2>Three sectors. One independent lens.</h2>
+      <p>We provide professional opinions on real property investment across construction and infrastructure — with the technical depth to challenge a pro-forma and the commercial sense to know what the market will actually pay.</p>
+    </header>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V8l5 3V8l5 3V8l5 3v9M9 20v-4M15 20v-4"/></svg>
+        </div>
+        <h3>Infrastructure</h3>
+        <p>Independent valuations and investment opinions across the backbone of Botswana's development pipeline.</p>
+        <ul class="service-list">
+          <li>Roads and access networks</li>
+          <li>Sewer and wastewater systems</li>
+          <li>Water supply infrastructure</li>
+          <li>Electricity supply and distribution</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="18" rx="1"/><rect x="13" y="8" width="8" height="13" rx="1"/><path d="M6 7h2M6 11h2M6 15h2M16 12h2M16 16h2"/></svg>
+        </div>
+        <h3>Commercial developments</h3>
+        <p>Analysis of income-producing assets — the numbers behind the pitch, the yield against comparable stock, and the risks in the lease structure.</p>
+        <ul class="service-list">
+          <li>Office blocks</li>
+          <li>Shopping malls and retail</li>
+          <li>Filling stations</li>
+          <li>Industrial developments</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-7h6v7"/></svg>
+        </div>
+        <h3>Residential developments</h3>
+        <p>Market positioning, absorption assumptions, and end-value realism — for developers and investors across the residential spectrum.</p>
+        <ul class="service-list">
+          <li>Single-home developments</li>
+          <li>Multi-residential schemes</li>
+          <li>End-user market assessments</li>
+          <li>Pre-sale feasibility reviews</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="approach-section">
+  <div class="section-inner">
+    <div class="approach-layout">
+      <div class="approach-copy">
+        <div class="section-eyebrow">The Property World approach</div>
+        <h2>Why independence matters.</h2>
+        <p>Most investment decisions in property come with a built-in bias: the developer wants the pro-forma to work, the bank wants the risk to look small, the agent wants the sale to close. Our value is that we're on none of those sides.</p>
+        <p>Every opinion we deliver starts with the numbers as we see them — not as we wish them to be. We apply the same methodology the REIB uses for valuation, we test assumptions against real comparable stock, and we give you a clear, defensible answer to the question you're actually asking.</p>
+        <p>Whether you're an investment committee deciding on a P200 million infrastructure play or a family office weighing a small multi-residential scheme, our job is the same: give you an honest professional view, backed by evidence you can interrogate.</p>
+      </div>
+
+      <div class="approach-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.4 1 6.1L12 16.5 6.5 19.4l1-6.1L3 8.9 9 8z"/></svg>
+          </div>
+          <div class="pillar-body">
+            <h4>Independent of every side</h4>
+            <p>We don't take instructions from developers, lenders, or agents on the outcome. Our opinion is our own.</p>
+          </div>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M7 13h2M12 13h2M17 13h2M7 17h2M12 17h2"/></svg>
+          </div>
+          <div class="pillar-body">
+            <h4>REIB-grounded methodology</h4>
+            <p>Our analysis follows the Real Estate Institute of Botswana methodology — the same standard your bank will recognise.</p>
+          </div>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 11H4a1 1 0 00-1 1v8a1 1 0 001 1h5a1 1 0 001-1v-8a1 1 0 00-1-1zM20 3h-5a1 1 0 00-1 1v16a1 1 0 001 1h5a1 1 0 001-1V4a1 1 0 00-1-1zM14.5 13h-5a1 1 0 00-1 1v6a1 1 0 001 1h5a1 1 0 001-1v-6a1 1 0 00-1-1z"/></svg>
+          </div>
+          <div class="pillar-body">
+            <h4>Numbers you can challenge</h4>
+            <p>Every assumption is documented. Every comparable is cited. Nothing is buried in a footnote.</p>
+          </div>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <div class="pillar-body">
+            <h4>Delivered in weeks, not months</h4>
+            <p>Scoped engagements move fast. We know the deal windows — and we respect them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="enquiry-section" id="enquiry">
+  <div class="section-inner">
+    <div class="enquiry-layout">
+      <form class="enquiry-form" id="enquiryForm" novalidate>
+        <div class="enquiry-head">
+          <div class="section-eyebrow">Book a consultation</div>
+          <h2>Tell us about the project.</h2>
+          <p>The more context you give us, the sharper the first conversation. A senior consultant reviews every enquiry personally and responds within 1 business day.</p>
+        </div>
+
+        <div class="enquiry-body">
+          <div class="form-grid">
+            <div class="form-field" data-field="name">
+              <label for="fullName">Full name <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" placeholder="Your name" autocomplete="name">
+              <div class="err-msg">Please provide your name.</div>
+            </div>
+            <div class="form-field">
+              <label for="company">Company <span class="hint">(optional)</span></label>
+              <input type="text" id="company" name="company" placeholder="Company or fund name" autocomplete="organization">
+            </div>
+            <div class="form-field" data-field="email">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@company.co.bw" autocomplete="email">
+              <div class="err-msg">Please enter a valid email.</div>
+            </div>
+            <div class="form-field" data-field="phone">
+              <label for="phone">Phone <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="+267 71 234 567" autocomplete="tel">
+              <div class="err-msg">Please provide a phone number.</div>
+            </div>
+
+            <div class="form-field full" data-field="interest">
+              <label>Area of interest <span class="req">*</span></label>
+              <div class="interest-pills">
+                <label class="interest-pill">
+                  <input type="radio" name="interest" value="infrastructure">
+                  <span>Infrastructure</span>
+                </label>
+                <label class="interest-pill">
+                  <input type="radio" name="interest" value="commercial">
+                  <span>Commercial</span>
+                </label>
+                <label class="interest-pill">
+                  <input type="radio" name="interest" value="residential">
+                  <span>Residential</span>
+                </label>
+                <label class="interest-pill">
+                  <input type="radio" name="interest" value="multiple" checked>
+                  <span>Multiple</span>
+                </label>
+              </div>
+              <div class="err-msg">Please select an area of interest.</div>
+            </div>
+
+            <div class="form-field full" data-field="message">
+              <label for="message">About the project <span class="req">*</span></label>
+              <textarea id="message" name="message" placeholder="A few sentences on the asset, the decision you're weighing, and any timeline we should know about."></textarea>
+              <div class="err-msg">Please describe what you'd like to discuss.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="enquiry-submit">
+          <div class="enquiry-note">
+            We'll respond within 1 business day. No obligation, no upfront fee for the initial consultation.
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">
+            Send enquiry
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <aside class="enquiry-side">
+        <div class="next-card">
+          <h4>What happens next</h4>
+          <div class="next-step">
+            <div class="next-num">1</div>
+            <div class="next-step-body">
+              <strong>Review</strong>
+              <span>A senior consultant reads your enquiry within 1 business day.</span>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="next-num">2</div>
+            <div class="next-step-body">
+              <strong>Discovery call</strong>
+              <span>A 30-minute conversation to scope the opinion and confirm what you need.</span>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="next-num">3</div>
+            <div class="next-step-body">
+              <strong>Proposal</strong>
+              <span>We send a written scope, timeline, and fee. You decide whether to proceed.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h4>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2 2-2 3.5M12 17h.01"/></svg>
+            Prefer to talk first?
+          </h4>
+          <p>Reach the investment team directly — we're happy to have a preliminary conversation before you put anything in writing.</p>
+          <div class="line">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+2673972039">+267 397 2039</a>
+          </div>
+          <div class="line">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+            <a href="mailto:consulting@pw.co.bw">consulting@pw.co.bw</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="success-section hidden" id="successState">
+  <div class="success-inner">
+    <div class="success-icon-lg">✓</div>
+    <h1>Enquiry received.</h1>
+    <p class="lede">A senior consultant will review your enquiry and reach out within 1 business day. If the matter is time-sensitive, call us directly on +267 397 2039 and quote the reference below.</p>
+
+    <div class="success-card">
+      <h3>Enquiry summary</h3>
+      <div class="ref-row"><span class="label">Reference</span><span class="value mono" id="sRef">—</span></div>
+      <div class="ref-row"><span class="label">Name</span><span class="value" id="sName">—</span></div>
+      <div class="ref-row"><span class="label">Area of interest</span><span class="value" id="sInterest">—</span></div>
+      <div class="ref-row"><span class="label">Contact email</span><span class="value" id="sEmail">—</span></div>
+      <div class="ref-row"><span class="label">Contact phone</span><span class="value" id="sPhone">—</span></div>
+    </div>
+
+    <div class="success-actions">
+      <button id="newEnquiryBtn" type="button">Send another enquiry</button>
+    </div>
+  </div>
+</section>
+
+<section class="quote-parallax">
+  <div class="quote-inner">
+    <blockquote>The most valuable number in any investment is the one nobody wants to tell you. Our job is to say it clearly.</blockquote>
+    <cite>Property World · Investment Consultancy</cite>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <h2>Common questions</h2>
+      <p>How developers, investors, and their advisors usually engage us.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What does an investment consultancy opinion include?</summary>
+        <p>It depends on the question you're asking. For a development, we typically deliver: <strong>market context</strong> (comparable supply, absorption, pricing), <strong>financial analysis</strong> (residual land value, IRR, yield on cost, sensitivity), <strong>risk assessment</strong> (planning, construction, financing, market), and a <strong>clear opinion</strong> on whether the numbers work at the proposed pricing. For infrastructure, it's a valuation of the asset or the pipeline against replacement cost and economic benefit. Every deliverable is written, cited, and defensible.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Who usually commissions these opinions?</summary>
+        <p>Investment committees, family offices, private developers, pension funds, banks (as a second opinion on their own credit files), and government or parastatal entities evaluating infrastructure proposals. We work equally well as the primary advisor on a deal or as an independent reviewer of someone else's analysis.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How is this different from a valuation?</summary>
+        <p>A valuation answers <em>"what is this asset worth today?"</em> — a point-in-time number, bank-ready, following the REIB scale. An investment consultancy opinion is broader: it looks forward, tests a proposed development or acquisition against market realities, and delivers a view on whether the decision makes sense. Many of our clients commission both — a valuation for their lender, and an opinion for their own investment committee.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What's the typical turnaround?</summary>
+        <p>A focused opinion on a single asset usually takes <strong>2–4 weeks</strong> from instruction. Larger or more complex engagements — a multi-phase development, an infrastructure portfolio review, or an independent challenge to an existing study — typically run <strong>4–8 weeks</strong>. We'll confirm the timeline in writing before we start.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can you review an investment plan that's already been done?</summary>
+        <p>Yes — this is one of the most common reasons clients come to us. We're regularly asked to act as an independent second opinion on a pro-forma, feasibility study, or development appraisal prepared elsewhere. We don't rewrite the original; we test it, poke at the assumptions, and give you a clear view on where the numbers are solid and where they aren't.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is there a fee for the initial consultation?</summary>
+        <p>No. The first discovery call is free and without obligation. If you'd like us to proceed with a written opinion, we'll send a scoped proposal with a fixed or capped fee — no surprises, no hourly creep unless we've agreed it upfront.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you work outside Botswana?</summary>
+        <p>Our core methodology is calibrated to the Botswana market, and most of our engagement is domestic. That said, we've advised on cross-border assets in the SADC region and can bring in partners where a specific local opinion is required. If you're unsure whether we're the right fit for a particular jurisdiction, mention it in your enquiry and we'll be candid about whether we can help.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="footer-logo" href="/" aria-label="Property World Home">
+        <img src="logo.png" alt="Property World">
+      </a>
+      <p class="footer-tagline">A complete property practice — brokerage, valuation, management, consulting, projects, and architecture under one roof.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/brokerage">Brokerage</a>
+        <a href="/valuation">Valuation</a>
+        <a href="/property-management">Property Management</a>
+        <a href="/investment-consultancy">Investment Consulting</a>
+        <a href="/project-management">Project Management</a>
+        <a href="/architecture">Architecture</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/listings">Listings</a>
+        <a href="/brokerage">List your property</a>
+        <a href="/valuation">Request a valuation</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Fair Housing</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Property World. All rights reserved.</div>
+    <div class="credit">Built by <strong>Vernon Clive Kawonza</strong></div>
+  </div>
+</footer>
+
+<script src="property-ai.js"></script>
+<script>
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const isEmail = v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+
+const DRAFT_KEY = 'pw-consultancy-draft';
+
+/* Map server error field keys → form wrapper keys */
+const SERVER_FIELD_MAP = {
+  'applicant.name': 'name',
+  'applicant.email': 'email',
+  'applicant.phone': 'phone',
+  interest: 'interest',
+  message: 'message'
+};
+
+const INTEREST_LABELS = {
+  infrastructure: 'Infrastructure',
+  commercial: 'Commercial developments',
+  residential: 'Residential developments',
+  multiple: 'Multiple sectors'
+};
+
+/* =========================================================
+   Form
+   ========================================================= */
+const form = $('#enquiryForm');
+const submitBtn = $('#submitBtn');
+
+function setFieldError(field, hasError){
+  const wrap = document.querySelector(`[data-field="${field}"]`);
+  if (wrap) wrap.classList.toggle('error', hasError);
+}
+
+function currentInterest(){
+  const r = $('input[name="interest"]:checked');
+  return r ? r.value : '';
+}
+
+function collectData(){
+  return {
+    applicant: {
+      name: $('#fullName').value.trim(),
+      company: $('#company').value.trim(),
+      email: $('#email').value.trim(),
+      phone: $('#phone').value.trim()
+    },
+    interest: currentInterest(),
+    message: $('#message').value.trim()
+  };
+}
+
+function validate(d){
+  const errors = [];
+  if (!d.applicant.name) { setFieldError('name', true); errors.push('fullName'); } else setFieldError('name', false);
+  if (!isEmail(d.applicant.email)) { setFieldError('email', true); errors.push('email'); } else setFieldError('email', false);
+  if (!d.applicant.phone) { setFieldError('phone', true); errors.push('phone'); } else setFieldError('phone', false);
+  if (!d.interest) { setFieldError('interest', true); errors.push('interest'); } else setFieldError('interest', false);
+  if (!d.message) { setFieldError('message', true); errors.push('message'); } else setFieldError('message', false);
+  return errors;
+}
+
+/* =========================================================
+   Draft persistence
+   ========================================================= */
+const DRAFT_FIELDS = ['fullName','company','email','phone','message'];
+function saveDraft(){
+  const data = {};
+  DRAFT_FIELDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  data.interest = currentInterest();
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch {}
+}
+function loadDraft(){
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    Object.entries(data).forEach(([id, val]) => {
+      if (id === 'interest') return;
+      const el = document.getElementById(id);
+      if (el && val) el.value = val;
+    });
+    if (data.interest){
+      const r = document.querySelector(`input[name="interest"][value="${data.interest}"]`);
+      if (r) r.checked = true;
+    }
+  } catch {}
+}
+
+let draftTimer;
+form.addEventListener('input', () => {
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(saveDraft, 400);
+});
+loadDraft();
+
+/* =========================================================
+   Submit
+   ========================================================= */
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const data = collectData();
+  const errors = validate(data);
+  if (errors.length) {
+    const first = document.getElementById(errors[0]);
+    if (first) first.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="spinner"></span> Sending…';
+
+  try {
+    const res = await fetch('/api/vas/investment-consultancy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const payload = await res.json().catch(() => ({}));
+
+    if (!res.ok){
+      if (res.status === 422 && Array.isArray(payload.fields)){
+        payload.fields.forEach(f => {
+          const key = SERVER_FIELD_MAP[f.field] || f.field;
+          setFieldError(key, true);
+        });
+        const first = document.querySelector('.form-field.error');
+        if (first) first.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+      throw new Error(payload.error || `Submission failed (${res.status})`);
+    }
+
+    try { localStorage.removeItem(DRAFT_KEY); } catch {}
+    showSuccess(payload, data);
+  } catch (err){
+    console.error('[Consultancy] submit error:', err);
+    alert(err.message || 'Submission failed. Please try again or email consulting@pw.co.bw.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send enquiry <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  }
+});
+
+/* =========================================================
+   Success
+   ========================================================= */
+function showSuccess(payload, data){
+  const enquiry = $('#enquiry');
+  const success = $('#successState');
+
+  $('#sRef').textContent = payload.ref;
+  $('#sName').textContent = data.applicant.name + (data.applicant.company ? ` (${data.applicant.company})` : '');
+  $('#sInterest').textContent = INTEREST_LABELS[data.interest] || '—';
+  $('#sEmail').textContent = data.applicant.email;
+  $('#sPhone').textContent = data.applicant.phone;
+
+  enquiry.style.display = 'none';
+  success.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => success.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+}
+
+$('#newEnquiryBtn').addEventListener('click', () => {
+  const enquiry = $('#enquiry');
+  const success = $('#successState');
+  success.classList.add('hidden');
+  enquiry.style.display = '';
+
+  form.reset();
+  ['name','email','phone','interest','message'].forEach(f => setFieldError(f, false));
+  const defaultInterest = document.querySelector('input[name="interest"][value="multiple"]');
+  if (defaultInterest) defaultInterest.checked = true;
+
+  window.scrollTo({ top: enquiry.offsetTop - 80, behavior: 'smooth' });
+});
+
+/* =========================================================
+   Mobile menu
+   ========================================================= */
+const mobMenu = $('#mobMenu');
+const hdrHamburger = $('#hdrHamburger');
+function syncScrollLock(){
+  document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
+}
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]');
+  if (!el) return;
+  if (el.dataset.act === 'close-mob'){
+    mobMenu.classList.remove('open');
+    mobMenu.setAttribute('aria-hidden','true');
+    hdrHamburger.setAttribute('aria-expanded','false');
+    syncScrollLock();
+  }
+});
+hdrHamburger.addEventListener('click', () => {
+  mobMenu.classList.add('open');
+  mobMenu.setAttribute('aria-hidden','false');
+  hdrHamburger.setAttribute('aria-expanded','true');
+  syncScrollLock();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && mobMenu.classList.contains('open')){
+    mobMenu.classList.remove('open');
+    syncScrollLock();
+  }
+});
+
+/* =========================================================
+   AI — consultancy aware
+   ========================================================= */
+function consultAnswer(q){
+  const t = q.toLowerCase().trim();
+
+  if (/(infrastructure|roads|sewer|water|electricity)/.test(t)){
+    return "Our infrastructure work covers roads, sewer, water supply and electricity supply — typically for developers, funds, and public-sector entities evaluating a pipeline or asset. We assess the asset against replacement cost and economic benefit, then give a professional opinion on the investment case. The engagement is usually 4–8 weeks for a pipeline review, or 2–4 weeks for a single asset. If you'd like to discuss a specific project, send the details through the enquiry form and a senior consultant will be in touch within 1 business day.";
+  }
+
+  if (/(commercial|office|mall|retail|filling station|industrial)/.test(t)){
+    return "For commercial developments — office blocks, shopping malls, filling stations, industrial — we analyse the numbers behind the pitch: comparable supply, absorption, yield on cost, lease structure risk, and residual land value. The output is a written opinion you can take to an investment committee, bank, or JV partner. If you have a specific asset in mind, send the details in the enquiry form and we'll scope it properly.";
+  }
+
+  if (/(residential|single home|multi|house|apartment)/.test(t) && !/property management/.test(t)){
+    return "For residential developments — single-home or multi-residential — we cover market positioning, absorption assumptions, and end-value realism. That includes testing pre-sale feasibility against comparable schemes. Every deliverable is written, cited, and defensible. If you want to discuss a specific site or scheme, the enquiry form is the fastest route — we review every submission personally.";
+  }
+
+  if (/(what.*do|services|offer|advise|help.*with)/.test(t)){
+    return "We advise on three areas: infrastructure (roads, sewer, water, electricity), commercial developments (offices, malls, filling stations, industrial), and residential developments (single homes and multi-residential). We're independent of developers, lenders, and agents — our opinion is our own. Use the enquiry form to tell us about the project, or say 'start the enquiry' and I'll scroll you there.";
+  }
+
+  if (/(valuation|different|vs|difference)/.test(t) && /(consult|investment|advice)/.test(t)){
+    return "A valuation answers 'what is this asset worth today?' — a point-in-time number, bank-ready, following the REIB scale. An investment consultancy opinion is broader: it looks forward, tests a proposed development or acquisition against market realities, and delivers a view on whether the decision makes sense. Many clients commission both — a valuation for their lender, and an opinion for their own investment committee.";
+  }
+
+  if (/(fee|cost|price|charge|pay)/.test(t)){
+    return "The initial discovery consultation is free and without obligation. If you'd like us to proceed with a written opinion, we send a scoped proposal with a fixed or capped fee — no surprises, no hourly creep unless we've agreed it upfront. We don't quote blindly because every engagement has a different shape. The best path is to send the enquiry and we'll respond with a proper proposal within 1 business day.";
+  }
+
+  if (/(how.*long|turnaround|timeline|weeks|days)/.test(t)){
+    return "A focused opinion on a single asset usually takes 2–4 weeks from instruction. Larger or more complex engagements — a multi-phase development, an infrastructure portfolio review, or an independent challenge to an existing study — typically run 4–8 weeks. We confirm the timeline in writing before we start.";
+  }
+
+  if (/(review|second opinion|existing|already)/.test(t) && /(plan|study|feasibility|analysis|pro-forma)/.test(t)){
+    return "Yes — that's a common reason clients come to us. We're regularly asked to act as an independent second opinion on a pro-forma, feasibility study, or development appraisal prepared elsewhere. We don't rewrite the original; we test it, poke at the assumptions, and give you a clear view on where the numbers hold and where they don't.";
+  }
+
+  if (/(who.*for|client|who.*hire|bank|fund|developer)/.test(t)){
+    return "We work with investment committees, family offices, private developers, pension funds, banks (as a second opinion on their own credit files), and government or parastatal entities evaluating infrastructure proposals. We operate equally well as the primary advisor on a deal or as an independent reviewer of someone else's analysis.";
+  }
+
+  if (/(botswana|international|outside|sadc|region)/.test(t)){
+    return "Our core methodology is calibrated to the Botswana market, and most of our engagement is domestic. We've advised on cross-border assets in the SADC region and can bring in partners where a specific local opinion is required. If you're unsure whether we're the right fit for a particular jurisdiction, mention it in your enquiry and we'll be candid about whether we can help.";
+  }
+
+  if (/(start|begin|enquir|consult|book|talk|contact)/.test(t)){
+    setTimeout(() => {
+      const el = document.getElementById('enquiry');
+      if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+    }, 300);
+    return "Scrolling you to the enquiry form — tell us about the project, and a senior consultant will respond within 1 business day. No obligation, no upfront fee for the initial conversation.";
+  }
+
+  return "I can help with our three service areas (infrastructure, commercial, residential), the difference between a valuation and an investment opinion, timelines, or getting you in touch with the team. Try 'what do you advise on?' or 'start the enquiry' — or just describe the project and I'll point you in the right direction.";
+}
+
+PropertyAI.configure({
+  storageKey: 'pw-ai-history',
+  page: 'investment-consultancy',
+  subtitle: 'Investment Consultancy',
+  greeting: "Hi — I'm the Property World investment consultancy advisor. We advise on infrastructure, commercial, and residential property investment. Ask me about our services, how we work, or say 'start the enquiry' and I'll scroll you to the form.",
+  quickPrompts: [
+    'What do you advise on?',
+    'Difference from a valuation?',
+    'How long does it take?',
+    'Start the enquiry'
+  ],
+  onReply: (q) => consultAnswer(q)
+});
+</script>
+
+</body>
+</html>
