@@ -435,6 +435,8 @@ class ListingService {
           sort_order: p.sort_order
         })),
         photo_groups: this._groupPhotos(photos),
+        video_url: r.video_url || null,
+        video_public_id: r.video_public_id || null,
         agent: agent ? {
           id: agent.id, name: agent.name, role: agent.role, title: agent.title,
           photo_url: agent.photo_url, email: agent.email, phone: agent.phone

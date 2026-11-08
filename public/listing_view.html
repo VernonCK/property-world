@@ -141,7 +141,7 @@ a{color:inherit;text-decoration:none}
   .info .specs li::after{padding-left:10px}
 }
 
-/* STRIP — dynamic, ordered: All photos → photo categories → utility buttons */
+/* STRIP */
 .strip-wrap{margin-top:28px;overflow:hidden;max-width:100%;width:100%}
 .strip{display:flex;gap:14px;overflow-x:auto;padding:4px 0 10px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
 .strip::-webkit-scrollbar{display:none}
@@ -155,9 +155,11 @@ a{color:inherit;text-decoration:none}
 .strip-card .thumb .ic{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff}
 .strip-card .thumb .ic svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.6}
 .strip-card span{display:block;margin-top:10px;font-size:13px;font-weight:500;line-height:1.25;color:var(--ink)}
-/* utility strip cards get a subtle different tone */
 .strip-card.utility .thumb{border-color:#e8e8e8}
 .strip-card.utility:hover .thumb{border-color:var(--amber)}
+.strip-card.video-card .thumb{border-color:var(--amber)}
+.strip-card.video-card:hover .thumb{border-color:var(--blue)}
+.strip-card.video-card .thumb .ic svg{fill:currentColor;stroke:none}
 @media(max-width:700px){
   .strip-card{width:100px}
   .strip-card .thumb{width:100px;height:100px}
@@ -312,11 +314,25 @@ a{color:inherit;text-decoration:none}
   .photo-grid .ph:nth-child(3n+1){grid-column:span 2;aspect-ratio:16/9}
 }
 .sv-loading{padding:60px 20px;text-align:center;color:var(--g600);font-size:14px;display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:8px;min-height:400px}
+
 .map-pane{padding:10px 0 20px}
 .map-pane .frame{position:relative;border-radius:8px;overflow:hidden;background:var(--g100);border:1px solid var(--g200)}
 .map-pane .frame iframe{display:block;width:100%;height:60vh;border:0}
 .map-pane .bar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px;padding:14px 18px;border:1px solid var(--g200);border-radius:6px;font-size:14px;flex-wrap:wrap}
 .map-pane .bar a{color:var(--blue);font-weight:500}
+
+/* VIDEO PANE */
+.video-pane{padding:12px 0 20px;min-height:60vh;display:flex;align-items:center;justify-content:center}
+.video-pane .video-wrap{width:100%;max-width:1100px;background:#000;border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.video-pane video{width:100%;max-height:72vh;display:block;background:#000;outline:none}
+.video-pane .video-meta{padding:14px 18px;background:#fff;border-top:1px solid var(--g200);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--g600)}
+.video-pane .video-meta strong{color:var(--ink);font-weight:600}
+@media(max-width:700px){
+  .video-pane{min-height:auto;padding:0}
+  .video-pane .video-wrap{border-radius:6px}
+  .video-pane video{max-height:50vh}
+}
+
 .ov-bottom{display:none;position:absolute;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));gap:10px;background:#fff;border-top:1px solid var(--g200);z-index:3}
 .ov-bottom button{flex:1;padding:13px;border-radius:100px;font-size:14px;font-weight:600}
 .ov-bottom .book{border:1px solid var(--blue);color:var(--blue);background:#fff}
@@ -633,7 +649,6 @@ a{color:inherit;text-decoration:none}
         <a href="/property-management">Property Management</a>
         <a href="/investment-consultancy">Investment Consulting</a>
         <a href="/project-management">Project Management</a>
-        <a href="/project-management">Architecture</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -698,12 +713,25 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="ov-pane" data-pane-id="street">
       <div class="map-pane">
-       <div class="frame">
-        <div id="ovStreetView" style="width:100%;height:60vh;min-height:400px;border-radius:8px;background:#f5f5f5"></div>
-      </div>
+        <div class="frame">
+          <div id="ovStreetView" style="width:100%;height:60vh;min-height:400px;border-radius:8px;background:#f5f5f5"></div>
+        </div>
         <div class="bar">
           <span id="ovStreetAddress">—</span>
-          <a id="ovStreetLink" href="#" target="_blank" rel="noopener">Open in Google Maps↗</a>
+          <a id="ovStreetLink" href="#" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="ov-pane" data-pane-id="video">
+      <div class="video-pane">
+        <div class="video-wrap">
+          <video id="listingVideo" controls playsinline preload="metadata">
+            Your browser doesn't support embedded video.
+          </video>
+          <div class="video-meta">
+            <div><strong id="videoTitle">—</strong></div>
+            <div id="videoRef">—</div>
+          </div>
         </div>
       </div>
     </div>
@@ -935,8 +963,21 @@ function fmtDate(d) {
   return dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
+/* Cloudinary video poster derivation:
+   /video/upload/v123/path/file.mp4  →  /video/upload/so_auto/v123/path/file.jpg
+   Returns null on anything that isn't a recognizable Cloudinary video URL. */
+function videoPosterUrl(videoUrl) {
+  if (!videoUrl || typeof videoUrl !== 'string') return null;
+  if (!videoUrl.includes('/video/upload/')) return null;
+  try {
+    return videoUrl
+      .replace('/video/upload/', '/video/upload/so_auto/')
+      .replace(/\.(mp4|webm|mov|avi|mkv|m4v)(\?.*)?$/i, '.jpg');
+  } catch { return null; }
+}
+
 /* =========================================================
-   FEATURE METADATA — maps feature keys → { label, icon }
+   FEATURE METADATA
    ========================================================= */
 const ICONS = {
   sofa: '<path d="M4 18V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9"/><path d="M4 18h16M4 18v2M20 18v2M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
@@ -966,15 +1007,11 @@ const ICONS = {
 };
 
 const FEATURE_META = {
-  // Skip these counts (already in info specs)
-  bedrooms: null,
-  bathrooms: null,
-  // Other counts
+  bedrooms: null, bathrooms: null,
   showers: { label: 'Showers', icon: 'bath' },
   garages: { label: 'Garages', icon: 'car' },
   carports: { label: 'Carports', icon: 'car' },
   airCons: { label: 'Air cons', icon: 'snow' },
-  // Toggles
   lounge: { label: 'Lounge', icon: 'sofa' },
   dining: { label: 'Dining', icon: 'sofa' },
   familyRoom: { label: 'Family room', icon: 'sofa' },
@@ -1035,10 +1072,7 @@ const state = {
 async function boot() {
   const params = new URLSearchParams(location.search);
   const id = parseInt(params.get('id'), 10);
-  if (!Number.isFinite(id) || id <= 0) {
-    showError();
-    return;
-  }
+  if (!Number.isFinite(id) || id <= 0) { showError(); return; }
   state.listingId = id;
 
   try {
@@ -1050,7 +1084,6 @@ async function boot() {
     return;
   }
 
-  /* Parallel: offers + recommendations. Failure here shouldn't kill the page. */
   fetchOffers(id).then(o => { state.offers = o; renderBidding(); }).catch(e => console.warn('offers', e));
   fetchRecommendations(id).then(r => { state.recommendations = r; renderRecommendations(); }).catch(e => console.warn('recs', e));
 
@@ -1064,9 +1097,6 @@ function showError() {
   document.title = 'Property not found | Property World';
 }
 
-/* =========================================================
-   FETCH
-   ========================================================= */
 async function fetchListing(id) {
   const res = await fetch(`/api/listings/${id}`, { headers: { Accept: 'application/json' } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1086,7 +1116,7 @@ async function fetchRecommendations(id) {
 }
 
 /* =========================================================
-   RENDER — top-level
+   RENDER
    ========================================================= */
 function renderAll() {
   renderHero();
@@ -1098,6 +1128,7 @@ function renderAll() {
   renderMap();
   renderSidebar();
   renderCrumbs();
+  renderVideoMeta();
   document.title = `${state.listing.title} | Property World`;
   $('#loadingWrap').classList.add('hidden');
   $('#mainView').classList.remove('hidden');
@@ -1129,7 +1160,6 @@ function renderHero() {
     if (!img.src) img.style.display = 'none';
   });
 
-  /* Status badge */
   const badge = $('#heroBadge');
   const badgeText = $('#heroBadgeText');
   if (l.status === 'on_offer') { badge.classList.remove('hidden'); badgeText.textContent = 'Accepting offers'; }
@@ -1162,11 +1192,9 @@ function renderInfo() {
   $('#listingLocText').textContent = loc;
 
   $('#listingUpdated').textContent = l.updated_at ? `Updated: ${fmtDate(l.updated_at)}` : '';
-
   const views = Number(l.views || 0);
   $('#listingViews').textContent = views.toLocaleString();
 
-  /* Offer count pill */
   const countLi = $('#listingOfferCountLi');
   if (l.status === 'live' || l.status === 'on_offer' || state.offers.length) {
     $('#listingOffersCount').textContent = l.active_offers_count ?? state.offers.length;
@@ -1176,7 +1204,19 @@ function renderInfo() {
 }
 
 /* =========================================================
-   STRIP — All photos → photo categories → utility buttons
+   VIDEO META (title bar under the player)
+   ========================================================= */
+function renderVideoMeta() {
+  const l = state.listing;
+  const titleEl = $('#videoTitle');
+  const refEl = $('#videoRef');
+  if (titleEl) titleEl.textContent = l.title || 'Property video';
+  if (refEl) refEl.textContent = l.ref || '';
+  /* No poster/video preload here — done lazily when the tab is opened */
+}
+
+/* =========================================================
+   STRIP — All photos → Video (if present) → categories → utilities
    ========================================================= */
 function renderStrip() {
   const l = state.listing;
@@ -1199,7 +1239,24 @@ function renderStrip() {
     </button>
   `);
 
-  /* 2. Dynamic photo categories (ordered by category.sort_order — the API already returns them sorted) */
+  /* 2. Video (only if listing has one) — sits right after All photos,
+        before the photo categories, so it reads as a top-level media view. */
+  if (l.video_url) {
+    const poster = videoPosterUrl(l.video_url) || cover;
+    cards.push(`
+      <button class="strip-card video-card" type="button" data-strip="pane-video">
+        <div class="thumb">
+          ${poster ? `<img src="${esc(poster)}" alt="">` : ''}
+          <div class="ic">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg>
+          </div>
+        </div>
+        <span>Video tour</span>
+      </button>
+    `);
+  }
+
+  /* 3. Photo categories */
   for (const g of groups) {
     const first = g.photos?.[0];
     const label = g.category?.name || 'Other';
@@ -1216,7 +1273,7 @@ function renderStrip() {
     `);
   }
 
-  /* 3. Utility buttons — placed LAST per request */
+  /* 4. Utilities — always last */
   cards.push(`
     <button class="strip-card utility" type="button" data-strip="scroll-bids">
       <div class="thumb">
@@ -1256,7 +1313,6 @@ function renderStrip() {
 
   strip.innerHTML = cards.join('');
 
-  /* Wire strip actions */
   $$('#strip [data-strip]').forEach(btn => {
     btn.addEventListener('click', () => {
       const act = btn.dataset.strip;
@@ -1264,6 +1320,7 @@ function renderStrip() {
       else if (act === 'cat') openOverlay('photos', btn.dataset.catSlug);
       else if (act === 'pane-map') openOverlay('map');
       else if (act === 'pane-street') openOverlay('street');
+      else if (act === 'pane-video') openOverlay('video');
       else if (act === 'scroll-bids') scrollToBids();
       else if (act === 'book') openDlg(bookDlg);
     });
@@ -1281,15 +1338,13 @@ function scrollToBids() {
    ========================================================= */
 function renderBidding() {
   const l = state.listing;
+  if (!l) return;
   const accepting = l.is_accepting_offers;
   const offers = state.offers || [];
 
   const pill = $('#biddingPill');
-  if (!accepting) {
-    pill.innerHTML = '<span style="color:var(--g600)">Closed</span>';
-  } else {
-    pill.innerHTML = '<span class="live-dot"></span> Open';
-  }
+  if (!accepting) pill.innerHTML = '<span style="color:var(--g600)">Closed</span>';
+  else pill.innerHTML = '<span class="live-dot"></span> Open';
 
   $('#bidBtn').disabled = !accepting;
   if (!accepting) $('#bidBtn').textContent = 'Offers closed';
@@ -1308,16 +1363,13 @@ function renderBidding() {
   $('#bidHighestFin').textContent = top.type === 'cash' ? 'Cash offer' : top.institution;
   $('#bidTotalCount').textContent = offers.length;
 
-  /* Close line — if we have expires_at on any, show it */
   const soonest = offers.reduce((min, o) => {
     if (!o.expires_at) return min;
     const d = new Date(o.expires_at).getTime();
     if (!min || d < min) return d;
     return min;
   }, null);
-  $('#bidCloseLine').textContent = soonest
-    ? `Earliest close: ${fmtDate(new Date(soonest))}`
-    : '';
+  $('#bidCloseLine').textContent = soonest ? `Earliest close: ${fmtDate(new Date(soonest))}` : '';
 
   $('#bidList').innerHTML = offers.map((o, i) => `
     <div class="bid-row${i === 0 ? ' top' : ''}">
@@ -1349,10 +1401,7 @@ function renderAbout() {
   const l = state.listing;
   const prose = $('#prose');
   const desc = String(l.description || '').trim();
-  if (!desc) {
-    $('#aboutSection').classList.add('hidden');
-    return;
-  }
+  if (!desc) { $('#aboutSection').classList.add('hidden'); return; }
   prose.textContent = desc;
 
   const specs = [];
@@ -1363,7 +1412,6 @@ function renderAbout() {
   if (l.ref)      specs.push({ l: 'Reference', v: l.ref });
   $('#gridSpecs').innerHTML = specs.map(s => `<div><small>${esc(s.l)}</small><span>${esc(s.v)}</span></div>`).join('');
 
-  /* Read-more toggle only if long */
   const btn = $('#readMoreBtn');
   if (desc.length < 260) btn.style.display = 'none';
   else btn.addEventListener('click', () => {
@@ -1373,7 +1421,7 @@ function renderAbout() {
 }
 
 /* =========================================================
-   FEATURES — dynamic based on features object
+   FEATURES
    ========================================================= */
 function renderFeatures() {
   const l = state.listing;
@@ -1381,7 +1429,6 @@ function renderFeatures() {
   const items = [];
   const seen = new Set();
 
-  /* Format 1: { amenities: ["Pool", "Garden"] } — seed format */
   if (Array.isArray(features.amenities)) {
     for (const a of features.amenities) {
       const key = AMENITY_TO_KEY[a];
@@ -1393,12 +1440,10 @@ function renderFeatures() {
     }
   }
 
-  /* Format 2: { bedrooms: 5, pool: true, ... } — admin format */
   for (const [key, value] of Object.entries(features)) {
     if (key === 'amenities' || seen.has(key)) continue;
     const meta = FEATURE_META[key];
     if (!meta) continue;
-
     if (typeof value === 'number' && value > 0) {
       items.push({ key, label: `${value} ${meta.label.toLowerCase()}`, icon: meta.icon });
       seen.add(key);
@@ -1440,8 +1485,7 @@ function renderMap() {
   $('#ovMapIframe').src = embedUrl;
 
   $('#ovStreetAddress').textContent = addr;
-   $('#ovStreetLink').href = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${encodeURIComponent(addr)}`;
-
+  $('#ovStreetLink').href = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${encodeURIComponent(addr)}`;
 }
 
 /* =========================================================
@@ -1468,7 +1512,6 @@ function renderSidebar() {
 
   $('#inqMsg').value = `Please contact me regarding ${l.title}.`;
 
-  /* Sidebar form submission */
   $('#inquiryForm').addEventListener('submit', async e => {
     e.preventDefault();
     const name = $('#inqName').value.trim();
@@ -1523,43 +1566,67 @@ function renderRecommendations() {
 }
 
 /* =========================================================
-   OVERLAY — dynamic tabs from photo_groups + map + street
+   OVERLAY — dynamic tabs from photo_groups + map + street + (optional) video
    ========================================================= */
 let overlayTab = 'photos';
+let activeCategorySlug = null;
 
 function buildOverlayTabs() {
   const tabs = $('#ovTabs');
-  const groups = state.listing.photo_groups || [];
-  const parts = [`<button data-pane="photos" type="button" class="active">Photos</button>`];
-  parts.push(`<button data-pane="map" type="button">Map</button>`);
-  parts.push(`<button data-pane="street" type="button">Street view</button>`);
+  const parts = [
+    `<button data-pane="photos" type="button" class="active">Photos</button>`,
+    `<button data-pane="map" type="button">Map</button>`,
+    `<button data-pane="street" type="button">Street view</button>`
+  ];
+  if (state.listing.video_url) {
+    parts.push(`<button data-pane="video" type="button">Video</button>`);
+  }
   tabs.innerHTML = parts.join('');
-  tabs.addEventListener('click', e => {
+  tabs.onclick = e => {
     const btn = e.target.closest('button[data-pane]');
     if (!btn) return;
     switchOverlayPane(btn.dataset.pane);
-  });
+  };
 }
 
 function switchOverlayPane(name) {
+  /* Defensive: if the requested pane doesn't exist (e.g. video asked for
+     but no video_url), fall back to photos so nothing renders blank. */
+  const $pane = document.querySelector(`.ov-pane[data-pane-id="${name}"]`);
+  if (!$pane) name = 'photos';
+
   overlayTab = name;
   $$('#ovTabs button').forEach(b => b.classList.toggle('active', b.dataset.pane === name));
   $$('.ov-pane').forEach(p => p.classList.toggle('active', p.dataset.paneId === name));
   $('#ovBody').scrollTop = 0;
+
+  /* Pause video when the user switches away */
+  const videoEl = document.getElementById('listingVideo');
+  if (videoEl && name !== 'video') {
+    try { videoEl.pause(); } catch {}
+  }
 
   if (name === 'street') {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         initStreetView();
         if (streetViewPano) {
-          google.maps.event.trigger(streetViewPano, 'resize');
+          try { google.maps.event.trigger(streetViewPano, 'resize'); } catch {}
         }
       });
     });
+  } else if (name === 'video') {
+    const video = document.getElementById('listingVideo');
+    if (video && state.listing.video_url && !video.src) {
+      video.src = state.listing.video_url;
+      const poster = videoPosterUrl(state.listing.video_url);
+      if (poster) video.poster = poster;
+    }
   }
 }
 
 function openOverlay(pane = 'photos', catSlug = null) {
+  activeCategorySlug = catSlug;
   buildOverlayTabs();
   renderPhotoFilterUI();
   renderPhotoGroupsUI();
@@ -1568,20 +1635,20 @@ function openOverlay(pane = 'photos', catSlug = null) {
   switchOverlayPane(pane);
 
   if (pane === 'photos' && catSlug) {
-    /* Wait for pane to become visible before measuring scroll target */
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         const el = document.querySelector(`.photo-group[data-category-slug="${catSlug}"]`);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        $$('#photoFilters button').forEach(b => {
-          b.classList.toggle('active', b.dataset.cat === catSlug);
-        });
+        $$('#photoFilters button').forEach(b => b.classList.toggle('active', b.dataset.cat === catSlug));
       });
     });
   }
 }
 
 function closeOverlay() {
+  /* Pause video if it's playing */
+  const video = document.getElementById('listingVideo');
+  if (video) { try { video.pause(); } catch {} }
   $('#overlay').classList.remove('open');
   document.body.style.overflow = '';
 }
@@ -1609,7 +1676,6 @@ function renderPhotoFilterUI() {
 }
 
 function renderPhotoGroupsUI() {
-  /* Always render ALL groups — the filter buttons only scroll */
   const groups = state.listing.photo_groups || [];
   const wrap = $('#photoGroups');
 
@@ -1647,7 +1713,6 @@ let fsPhotos = [];
 let activeImg, inactiveImg;
 
 function openFullscreen(url) {
-  /* Flat list ordered by category → sort_order */
   fsPhotos = [];
   for (const g of (state.listing.photo_groups || [])) {
     for (const p of g.photos) fsPhotos.push(p.url);
@@ -1813,11 +1878,9 @@ bidForm.addEventListener('submit', async e => {
     bidFormWrap.classList.add('hidden');
     bidSuccess.classList.remove('hidden');
 
-    /* If user opted for notifications, subscribe via the same email */
     if ($('#bidNotify').checked && email) {
       postJson(`/api/listings/${l.id}/subscriptions`, {
-        email,
-        name,
+        email, name,
         prefs: ['offer_lapsed', 'offer_relinquished', 'price_change']
       }).catch(() => {});
     }
@@ -2024,7 +2087,6 @@ function aiReply(q) {
 
   if (!l) return "I'm still loading this listing. Try again in a moment.";
 
-  /* Search intent → hand off to /listings */
   if (/(show|find|search|browse|looking for|see)\b/.test(t) &&
       /\b(properties|listings|villas|houses|apartments|homes|rentals|similar|other)\b/.test(t)) {
     sessionStorage.setItem('pw-ai-pending', JSON.stringify({
@@ -2049,6 +2111,12 @@ function aiReply(q) {
   if (/(view|tour|visit|appointment|book)/.test(t)) {
     setTimeout(() => { resetBookingDialog(); openDlg(bookDlg); }, 400);
     return "I've opened the booking form — pick a date and I'll send it to the agent.";
+  }
+
+  if (/(video|tour|walkthrough|clip)/.test(t)) {
+    if (!l.video_url) return "There's no video tour on this listing. The photos cover the property well — tap 'All photos' to browse.";
+    setTimeout(() => openOverlay('video'), 400);
+    return "Opening the video tour for you.";
   }
 
   if (/(feature|pool|garden|bedroom|bath|gym|fireplace)/.test(t)) {
@@ -2134,25 +2202,18 @@ function initStreetView() {
   el.innerHTML = '<div class="sv-loading"><span class="spinner-inline"></span> Finding Street View…</div>';
 
   const l = state.listing;
-
-  /* If the DB later adds lat/lng, use them directly — faster and more accurate */
   if (l && l.latitude != null && l.longitude != null) {
     const loc = new google.maps.LatLng(l.latitude, l.longitude);
     showPanoramaAt(el, loc);
     return;
   }
 
-  /* Otherwise geocode the address. Falls back to city + country if the full address misses. */
   const fullAddr = [l.title, l.city, l.region, l.country].filter(Boolean).join(', ');
   const fallbackAddr = [l.city, l.region, l.country].filter(Boolean).join(', ');
   const geocoder = new google.maps.Geocoder();
 
   geocoder.geocode({ address: fullAddr }, (results, status) => {
-    if (status === 'OK' && results[0]) {
-      showPanoramaAt(el, results[0].geometry.location);
-      return;
-    }
-    /* Retry with a looser address */
+    if (status === 'OK' && results[0]) { showPanoramaAt(el, results[0].geometry.location); return; }
     geocoder.geocode({ address: fallbackAddr }, (results2, status2) => {
       if (status2 === 'OK' && results2[0]) {
         showPanoramaAt(el, results2[0].geometry.location);
