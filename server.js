@@ -16,7 +16,7 @@ const valuationRoutes = require('./src/routes/valuation.routes');
 const consultationRoutes = require('./src/routes/consultation.routes');
 const projectManagementRoutes = require('./src/routes/project-management.routes');
 const propertyManagementRoutes = require('./src/routes/property-management.routes');
-
+const aiParseRoutes = require('./src/routes/ai-parse.routes');
 
 async function main() {
   /* Fail fast if the DB is unreachable */
@@ -40,6 +40,7 @@ async function main() {
   /* API routes */
   app.use('/api', landingRoutes({ db }));
   app.use('/api/ai', aiRoutes({ db }));
+  app.use('/api/ai', aiParseRoutes({ db }));
   app.use('/api/listings', listingRoutes({ db }));
   app.use('/api/vas', brokerageRoutes({ db }));
   app.use('/api/vas', valuationRoutes({ db }));

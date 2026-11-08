@@ -451,7 +451,7 @@
     /* 1. Parent page search pipeline (parse + apply) */
     if (typeof config.parseQuery === 'function' && typeof config.onSearch === 'function') {
       try {
-        const parsed = config.parseQuery(query);
+        const parsed = await config.parseQuery(query);
         const meaningful = parsed && (
           (parsed.matched && parsed.matched.length > 0) ||
           parsed.mode || parsed.category ||

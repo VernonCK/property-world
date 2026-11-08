@@ -228,7 +228,6 @@ class BrokerageService {
     let upload;
     try {
       upload = await uploads.uploadPdf(pdfBuffer, {
-        folder: 'pw/vas/brokerage',
         publicId: reference
       });
     } catch (err) {
@@ -238,7 +237,7 @@ class BrokerageService {
       e.code = 'pdf_upload_failed';
       throw e;
     }
-
+ 
     /* 3. Routing — no listing exists yet, so fall back to primary_user_id */
     const [ruleRows] = await this.db.pool.execute(
       `SELECT * FROM routing_rules WHERE service = 'brokerage' LIMIT 1`

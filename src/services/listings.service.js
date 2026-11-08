@@ -510,10 +510,12 @@ class ListingService {
     if (opts.new_build) { cond.push('l.new_build = 1'); }
     if (opts.country) { cond.push('l.country = ?'); params.push(opts.country); }
     if (opts.city) { cond.push('l.city = ?'); params.push(opts.city); }
+    if (opts.region) { cond.push('l.region = ?'); params.push(opts.region); }
+    
     if (opts.q) {
       const like = `%${opts.q}%`;
-      cond.push('(l.title LIKE ? OR l.description LIKE ? OR l.city LIKE ? OR l.country LIKE ? OR l.ref LIKE ?)');
-      params.push(like, like, like, like, like);
+      cond.push('(l.title LIKE ? OR l.description LIKE ? OR l.city LIKE ? OR l.region LIKE ? OR l.country LIKE ? OR l.ref LIKE ?)');
+      params.push(like, like, like, like, like, like);
     }
     for (const a of opts.amenities) {
       cond.push("JSON_CONTAINS(l.features, ?, '$.amenities')");
