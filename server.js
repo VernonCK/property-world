@@ -49,7 +49,7 @@ async function main() {
 
   /* Health check */
   app.get('/healthz', async (_req, res) => {
-      const mysql = require('mysql2/promise');
+     /*const mysql = require('mysql2/promise');
 
       const connection = await mysql.createConnection({
         host: 'sql.freedb.tech', // Replace with your TiDB host
@@ -61,7 +61,7 @@ async function main() {
 
       const [rows] = await connection.execute('SELECT 1 AS connected');
       console.log(rows); // Outputs: [ { connected: 1 } ]
-      await connection.end();
+      await connection.end();*/
       res.json({ ok: true, app: 'front' })
   });
 
@@ -79,6 +79,14 @@ async function main() {
 
   app.listen(config.front.port, () => {
     console.log(`[Property World] listening on http://localhost:${config.front.port}`);
+    setInterval(async () => {
+      try {
+        await fetch("https://property-world.onrender.com");
+        console.log("Self-ping sent");
+      } catch (err) {
+        console.error("Ping failed:", err);
+      }
+    }, 5 * 60 * 1000); // every 5 minutes
   });
 
   /* Graceful shutdown */

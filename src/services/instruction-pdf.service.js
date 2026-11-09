@@ -21,7 +21,7 @@ async function getBrowser() {
   if (!_browserPromise) {
     _browserPromise = puppeteer.launch({
       headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--font-render-hinting=none']
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--font-render-hinting=none', '--single-process', '--disable-dev-shm-usage'],
     });
   }
   return _browserPromise;
