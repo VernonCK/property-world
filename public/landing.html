@@ -1044,36 +1044,26 @@ function fmtPrice(v){
 $$('.search-row[data-mode]').forEach(form => {
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const cfg = TAB_CONFIG[activeTab];
+    const mode = form.dataset.mode;
+    const type = form.querySelector('[name="type"]').value.trim();
+    const location = form.querySelector('[name="q"]').value.trim();
+    const price = form.querySelector('[name="price"]').value.trim();
 
-    /* Non-search tabs → navigate to the destination page */
-    if (!cfg.isSearch){
-      window.location.href = cfg.action;
-      return;
-    }
-
-    /* Search tabs → execute the search immediately, hand off to /listings,
-      and let the results page open the chat with the continuation message. */
-    const parts = [];
-    if (searchType.value) parts.push(searchType.value);
-    if (searchInput.value.trim()) parts.push(searchInput.value.trim());
-    const q = parts.join(' ').trim();
-
-    if (!q){
-      /* Empty submit — just open the chat as a convo starter */
+    /* Empty form → open the AI panel as a convo starter */
+    if (!type && !location && !price){
       if (window.PropertyAI) PropertyAI.open();
       return;
     }
 
-    /* Bridge to the results page: the query itself + the greeting we want
-      the chat to display when it opens there. */
-    const greeting = `Here's what I found for "${q}". Is this what you're looking for, or should I refine the search?`;
-    sessionStorage.setItem('pw-ai-pending', JSON.stringify({ query: q, reply: greeting }));
+    const parts = [];
+    if (mode === 'rent') parts.push('rentals');
+    if (type) parts.push(type.toLowerCase());
+    else if (mode === 'buy') parts.push('properties');
+    if (location) parts.push('in ' + location);
+    if (price) parts.push(fmtPrice(price));
 
-    const params = new URLSearchParams();
-    params.set('mode', activeTab === 'rent' ? 'rent' : 'buy');
-    params.set('q', q);
-    window.location.href = '/listings?' + params.toString();
+    const query = parts.join(' ').trim();
+    if (window.PropertyAI) PropertyAI.send(query);
   });
 });
 

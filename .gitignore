@@ -117,7 +117,7 @@ dist
 # DynamoDB Local files
 .dynamodb/
 database/*.db
-uploads/
+
 reports/
 tests/test_results
 tests/test_data

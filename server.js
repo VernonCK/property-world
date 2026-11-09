@@ -4,7 +4,6 @@ const path = require('path');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-
 const config = require('./src/config');
 const { Database } = require('./src/db/database');
 const { closeBrowser } = require('./src/services/instruction-pdf.service');
@@ -49,7 +48,22 @@ async function main() {
   app.use('/api/vas', propertyManagementRoutes({ db }));
 
   /* Health check */
-  app.get('/healthz', (_req, res) => res.json({ ok: true, app: 'front' }));
+  app.get('/healthz', async (_req, res) => {
+      const mysql = require('mysql2/promise');
+
+      const connection = await mysql.createConnection({
+        host: 'sql.freedb.tech', // Replace with your TiDB host
+        port: 3306,
+        user: 'u_49l1J9', // Replace with your exact prefixed username
+        password: 'CRE5uxRtuVYg',
+        database: 'freedb_iWowESWu'
+      });
+
+      const [rows] = await connection.execute('SELECT 1 AS connected');
+      console.log(rows); // Outputs: [ { connected: 1 } ]
+      await connection.end();
+      res.json({ ok: true, app: 'front' })
+  });
 
   /* 404 for unknown API paths */
   app.use((req, res) => {

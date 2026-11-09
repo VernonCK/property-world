@@ -967,13 +967,14 @@ function fmtDate(d) {
    /video/upload/v123/path/file.mp4  →  /video/upload/so_auto/v123/path/file.jpg
    Returns null on anything that isn't a recognizable Cloudinary video URL. */
 function videoPosterUrl(videoUrl) {
-  if (!videoUrl || typeof videoUrl !== 'string') return null;
-  if (!videoUrl.includes('/video/upload/')) return null;
-  try {
-    return videoUrl
-      .replace('/video/upload/', '/video/upload/so_auto/')
-      .replace(/\.(mp4|webm|mov|avi|mkv|m4v)(\?.*)?$/i, '.jpg');
-  } catch { return null; }
+  return videoUrl
+  // if (!videoUrl || typeof videoUrl !== 'string') return null;
+  // if (!videoUrl.includes('/video/upload/')) return null;
+  // try {
+  //   return videoUrl
+  //     .replace('/video/upload/', '/video/upload/so_auto/')
+  //     .replace(/\.(mp4|webm|mov|avi|mkv|m4v)(\?.*)?$/i, '.jpg');
+  // } catch { return null; }
 }
 
 /* =========================================================
