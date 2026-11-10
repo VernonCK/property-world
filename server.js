@@ -79,14 +79,14 @@ async function main() {
 
   app.listen(config.front.port, () => {
     console.log(`[Property World] listening on http://localhost:${config.front.port}`);
-    setInterval(async () => {
-      try {
-        await fetch("https://property-world.onrender.com");
-        console.log("Self-ping sent");
-      } catch (err) {
-        console.error("Ping failed:", err);
-      }
-    }, 5 * 60 * 1000); // every 5 minutes
+    // setInterval(async () => {
+    //   try {
+    //     await fetch("https://property-world.onrender.com");
+    //     console.log("Self-ping sent");
+    //   } catch (err) {
+    //     console.error("Ping failed:", err);
+    //   }
+    // }, 5 * 60 * 1000); // every 5 minutes
   });
 
   /* Graceful shutdown */
