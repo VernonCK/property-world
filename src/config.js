@@ -48,7 +48,7 @@ const config = Object.freeze({
     user: req('DB_USER'),
     password: req('DB_PASSWORD'),
     database: req('DB_NAME'),
-    poolSize: num('DB_POOL_SIZE', 10),
+    poolSize: num('DB_POOL_SIZE', 1),
     timezone: opt('DB_TIMEZONE', 'Z'),
   },
 
